@@ -1,0 +1,11 @@
+:root {
+    --fundo: #040D12; /* Fundo do formulário */
+    --secundario: #5C8374; /* Área secundária, como campos de entrada */
+    --botoes: #183D3D; /* Cor de fundo dos botões */
+    --borda-destaque: #183D3D; /* Cor para bordas e elementos de destaque */
+    --text: #6e887e;
+}
+
+body{
+    background-color: var(--fundo);
+}
