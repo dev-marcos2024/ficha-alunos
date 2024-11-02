@@ -3,12 +3,13 @@ import { Header } from './Header'
 import { Main } from './Main'
 import { Footer } from './Footer'
 import { Link } from 'react-router-dom'
+import { Actions } from './Acitions'
 
 
 export const Ficha= ()=>{
   return(
     <div className={styles.folhaA4}>
-      <Link to='/'>Home</Link>
+      <Actions/>
       <Header />
       <Main />
       <div className={styles.assinatura}>

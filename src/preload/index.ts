@@ -1,4 +1,4 @@
-import { contextBridge } from 'electron'
+import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 
 // Custom APIs for renderer
@@ -9,14 +9,27 @@ const api = {}
 // just add to the DOM global.
 if (process.contextIsolated) {
   try {
-    contextBridge.exposeInMainWorld('electron', electronAPI)
-    contextBridge.exposeInMainWorld('api', api)
+    contextBridge.exposeInMainWorld('electron', electronAPI);
+    contextBridge.exposeInMainWorld('api', api);
+
+    // Expondo a função de impressão
+    contextBridge.exposeInMainWorld('customApi', {
+      sendPrintRequest: () => ipcRenderer.send('print-request'),
+    });
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 } else {
   // @ts-ignore (define in dts)
   window.electron = electronAPI
   // @ts-ignore (define in dts)
   window.api = api
+
+  // Expondo a função de impressão
+  // @ts-ignore
+  window.customApi = {
+    sendPrintRequest: () => ipcRenderer.send('print-request'),
+  };
 }
+
+
