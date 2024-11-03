@@ -9,6 +9,8 @@
     padding: 10px 1rem 0 1rem;
     box-sizing: border-box;
     position: relative;
+    background-color: white;
+    color: black;
 }
 *{
     box-sizing: border-box;
@@ -112,6 +114,7 @@ img{
 .container{
     font-size: 9pt;
     border: 1px solid;
+    border-bottom: none;
     width: 18cm;
     margin: auto;
 }
@@ -321,4 +324,10 @@ td{
     display: flex;
 }
 
+.actions:active{
+    display: none;
+}
+.desativado{
+    display: none;
+}
 

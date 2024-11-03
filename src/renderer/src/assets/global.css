@@ -1,3 +1,4 @@
+@import url('./base.css');
 :root {
     --fundo: #040D12; /* Fundo do formulário */
     --secundario: #5C8374; /* Área secundária, como campos de entrada */
@@ -6,6 +7,13 @@
     --text: #6e887e;
 }
 
-body{
-    background-color: var(--fundo);
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #14141f!important;
+    background-size: cover;
+    user-select: none;
+    color: #f3f3f3!important;
+    padding: 2rem;
 }

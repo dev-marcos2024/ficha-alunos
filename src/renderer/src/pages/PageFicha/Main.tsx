@@ -1,5 +1,5 @@
 import styles from './style.module.css'
-
+import { Tabela } from './Tabela'
 
 export const Main = ()=>{
 
@@ -196,6 +196,7 @@ export const Main = ()=>{
           </div>
         </div>
 
+        <Tabela/>
       </div>
     </main>
   )

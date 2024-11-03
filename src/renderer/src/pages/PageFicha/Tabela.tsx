@@ -1,7 +1,8 @@
-import styles from '@renderer/src/pages/PageFicha/style.module.css'
+import styles from './style.module.css'
 
-
-export const Tabela = ()=>{
+export const Tabela = () => {
+  const numLinhas = 6;
+  const numColunas = 7;
 
   return (
     <table id="tabela" className={styles.tabela}>
@@ -17,8 +18,14 @@ export const Tabela = ()=>{
       </tr>
       </thead>
       <tbody>
-
+      {Array.from({ length: numLinhas }).map((_, linhaIndex) => (
+        <tr key={linhaIndex}>
+          {Array.from({ length: numColunas }).map((_, colunaIndex) => (
+            <td key={colunaIndex}></td>
+          ))}
+        </tr>
+      ))}
       </tbody>
     </table>
-  )
+  );
 }
