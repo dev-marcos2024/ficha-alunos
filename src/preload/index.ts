@@ -2,11 +2,23 @@ import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 
 // Custom APIs for renderer
-const api = {}
+const api = {
+  getUF: ()=>{
+    return  ipcRenderer.invoke('getUF')
+  },
 
-// Use `contextBridge` APIs to expose Electron APIs to
-// renderer only if context isolation is enabled, otherwise
-// just add to the DOM global.
+  getCidades: (uf:string) => {
+    return ipcRenderer.invoke('getCidades', uf);
+  },
+  getEndereco: (cep:string)=>{
+    return  ipcRenderer.invoke('getEndereco', cep)
+  },
+}
+
+
+
+
+
 if (process.contextIsolated) {
   try {
     contextBridge.exposeInMainWorld('electron', electronAPI);

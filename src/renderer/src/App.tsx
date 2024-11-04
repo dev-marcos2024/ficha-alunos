@@ -1,11 +1,14 @@
 import { Routes } from "./Routes"
+import { Providers } from './utils/tanstack-query/Provider'
 
 
 function App(){
 
   return (
     <div>
-      <Routes/>
+      <Providers>
+        <Routes/>
+      </Providers>
     </div>
   )
 }
