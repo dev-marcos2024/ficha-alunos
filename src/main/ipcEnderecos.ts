@@ -1,13 +1,14 @@
 import {ipcMain} from 'electron'
 import axios from 'axios'
-import {Estado} from './types/TypeUf'
+import {Estado} from '../types/TypeUf'
+import { Municipio } from '../types/TypeMunicipio'
 
 const req = axios.create({
   baseURL: 'https://servicodados.ibge.gov.br/api/v1/localidades',
 })
 
 // Api para obter todos estados do brasil
-ipcMain.handle("getUF", async () =>{
+ipcMain.handle("getUF", async ()=>{
   const result = await req.get(`/estados`);
   return result.data.map((item: Estado) => item.sigla);
 })
@@ -16,7 +17,7 @@ ipcMain.handle("getUF", async () =>{
 ipcMain.handle("getCidades", async (event, uf)=>{
   const result = await req.get(`/estados/${uf}/municipios`);
 
-  return result.data
+  return result.data.map((item: Municipio) => item.nome)
 })
 
 // Api para obter rua pelo CEP

@@ -1,5 +1,5 @@
 import { Route, Router } from "electron-router-dom";
-import { Home } from "./pages/Home";
+import { Formulario } from "./pages/Formulario/Formulario";
 import { Ficha } from "./pages/PageFicha/Ficha";
 
 // Criando as Rotas
@@ -8,7 +8,7 @@ export function Routes(){
     <Router
       main={
         <>
-          <Route path="/" element={<Home/>}/>
+          <Route path="/" element={<Formulario/>}/>
           <Route path="/ficha" element={<Ficha/>}/>
         </>
       }

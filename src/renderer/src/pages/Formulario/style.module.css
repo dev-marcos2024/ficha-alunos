@@ -1,0 +1,14 @@
+
+.form{
+    margin-top: 2rem;
+    padding: 2rem;
+    background-color: #144272;
+}
+
+.fieldset{
+    border-radius: 1rem;
+    background-color: aliceblue;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+}

@@ -1,10 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { queryClient } from "./queryClient";
 
 // Hook para buscar o endereco via cep
-export const useUf = () => {
+export const useUf = ():UseQueryResult<string[], Error> => {
   return useQuery({
-    queryKey: ['uf'],  // Inclua o código do estado na chave da query
+    queryKey: ['uf'],  
     queryFn: () => window.api.getUF(),
   });
 };
@@ -12,18 +12,18 @@ export const useUf = () => {
 // Hook para buscar cidades de um estado específico
 export const useCidades = (uf:string) => {
   return useQuery({
-    queryKey: ['cidades', uf],  // Inclua o código do estado na chave da query
-    queryFn: () => window.api.getCidades(uf),
-    enabled: !!uf,  // Só executa a query se `uf` estiver definido
+    queryKey: ['cidades', uf],  
+    queryFn: () => window.api.getCidades(uf.toUpperCase().trim()),
+    enabled: !!uf,  
   });
 };
 
 // Hook para buscar o endereco via cep
 export const useEndereco = (cep:string) => {
   return useQuery({
-    queryKey: ['endereco', cep],  // Inclua o código do estado na chave da query
+    queryKey: ['endereco', cep],  
     queryFn: () => window.api.getEndereco(cep),
-    enabled: !!cep,  // Só executa a query se `uf` estiver definido
+    enabled: !!cep,  
   });
 };
 

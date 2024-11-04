@@ -8,8 +8,8 @@ import './ipcEnderecos'
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 1024,
-    height: 670,
+    width: 1400,
+    height: 800,
     minWidth: 1200,
     backgroundColor: '#222222',
     show: false,
