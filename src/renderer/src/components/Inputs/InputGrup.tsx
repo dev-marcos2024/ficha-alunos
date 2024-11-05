@@ -1,30 +1,32 @@
-import { strict } from "assert"
-import { string } from "zod"
-
-
+import { useFormContext } from '../../contexts/ContextForm'
+import { AlunoInfo } from '../../../../types/SchemaForm'
+import { data } from 'autoprefixer'
 
 interface Props{
     id: string,
     texto: string
-    isValido: boolean
     placeholder: string,
-    col: string
+    name: keyof AlunoInfo;
 }
  
 
-export const InputGroup = ({ id, texto, isValido, placeholder, col }: Props)=>{
+export const InputGroup = ({ id, texto, placeholder, name }: Props)=>{
+    const {register, formState: { errors} } = useFormContext();
 
+
+  console.log();
     return (
-        <div className={`input-group input-group-lg ${col}`}>
+        <div className= 'input-group input-group-lg' >
             <span className="input-group-text" id={id}>{texto}</span>
-            <input 
-            type='text'
-            className= {`form-control ${isValido? 'is-valid' : 'is-invalid'}`} 
-            id={id}
-            placeholder={placeholder}
-            aria-label="Sizing example input"
-            aria-describedby="inputGroup-sizing-lg"
-        />
+            <input
+              {...register(name)}
+                type='text'
+                className= {`form-control ${errors[name]? 'is-invalid' : 'is-valid'}`}
+                id={id}
+                placeholder={placeholder}
+                aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-lg"
+            />
         </div>
     )
 }

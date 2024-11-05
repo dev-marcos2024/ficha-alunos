@@ -1,3 +1,9 @@
+@import url('bootstrap/dist/css/bootstrap.min.css');
+@import url('bootstrap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
     --fundo: #040D12; /* Fundo do formulário */
     --secundario: #5C8374; /* Área secundária, como campos de entrada */
@@ -12,4 +18,5 @@ body {
     justify-content: center;
     background-color: var(--fundo)!important;
     user-select: none;
+    color: var(--borda-destaque)!important;
 }

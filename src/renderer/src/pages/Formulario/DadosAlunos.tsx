@@ -15,8 +15,12 @@ export const DadosAlunos = ()=>{
                 <legend>Dados do Aluno</legend>
 
                 <div className="row mb-3">
-                    <InputGroup id="ra" isValido={false} placeholder="Digite o RA" texto="RA" col="col"/>
-                    <InputGroup id="rm" isValido={true} placeholder="Digite o RM" texto="RM" col="col"/>
+                    <div className= 'col-5'>
+                      <InputGroup  id="ra" placeholder="Digite o RA" texto="RA" name='ra'/>
+                    </div>
+                    <div className= 'col-4'>
+                      <InputGroup id="rm" placeholder="Digite o RM" texto="RM" name='rm'/>
+                    </div>
                 </div>
                 
                 <InputText id="inp" isValido={true} placeholder="Dogite o nome" texto="Nome do Aluno" tipo="text" />
