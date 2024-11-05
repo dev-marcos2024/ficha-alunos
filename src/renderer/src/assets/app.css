@@ -1,0 +1,3 @@
+:root {
+    --bs-form-control-focus-border-color: #ff5733 !important; /* Define a nova cor de foco globalmente */
+}

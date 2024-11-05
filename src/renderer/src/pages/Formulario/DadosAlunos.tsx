@@ -1,12 +1,15 @@
 import { DropdownsSearch } from "../../components/Dropdowns/Dropdowns"
 import { InputGroup } from "../../components/Inputs/InputGrup";
 import { InputText } from "../../components/Inputs/InputText";
-import { SelectSearch } from "../../components/Select/Select"
+import { SelectSearch } from "../../components/Selects/Select"
 import { useCidades, useUf } from "../../utils/tanstack-query/queries"
 import styles from './style.module.css'
 import { FormikErrors, FormikTouched } from 'formik'
 import { TypeForm } from '@renderer/src/models/SchemaForm'
-import { ButtonRadio } from '../../components/Buttons/ButtonRadio'
+import { InputOption2 } from "../../components/Inputs/InputOption2";
+import { RadioRaca } from "../../components/Radios/RadioRAca";
+import { AlunosSexo } from "../../components/Radios/RadioSexo";
+import { Select } from "../../components/Select";
 
 interface Props{
   touched:  FormikTouched<TypeForm>,
@@ -33,30 +36,27 @@ export const DadosAlunos = ({touched, errors}:Props)=>{
         </div>
 
         <InputText
-          placeholder="Dogite o nome"
+          placeholder="Digite o nome"
           texto="Nome do Aluno"
           tipo="text" nome='alunoNome' touched={touched.alunoNome} errors={errors.alunoNome} />
 
-        <div className="row mb-3">
+        
+        <div className="flex gap-4">
+          <InputOption2 nome="alunosRgCpf" texto1="RG" texto2="Cpf" texto3="RG ou CPF do Aluno" errors={errors} touched={touched}/>
           <InputText
-            placeholder="Dogite o nome"
-            texto="Nome do Aluno"
-            tipo="text" nome='alunoNome' touched={touched.alunoNome} errors={errors.alunoNome} />
-          <InputText
-            placeholder="Dogite o nome"
-            texto="Nome do Aluno"
-            tipo="text" nome='alunoNome' touched={touched.alunoNome} errors={errors.alunoNome} />
-          <InputText
-            placeholder="Dogite o nome"
-            texto="Nome do Aluno"
-            tipo="text" nome='alunoNome' touched={touched.alunoNome} errors={errors.alunoNome} />
+            placeholder="Digite o Nis"
+            texto="Nis do Aluno"
+            tipo="text" nome='alunoNis' touched={touched.alunoNis} errors={errors.alunoNis} />
         </div>
 
-        <div className='col-4'>
-          <InputGroup id="rm" placeholder="Digite o RM"
-              texto={<ButtonRadio texto='RG' nome='alunoRg' touched={touched.alunoRg} errors={errors.alunoRg}/>}
-              nome='alunoRgCpf' touched={touched.rm}
-              errors={errors.rm} />
+        <div className="flex justify-between">
+          <RadioRaca nome="alunoRaca"/>
+          <AlunosSexo nome="alunoSexo"/>
+        </div>
+
+        <div className="flex">
+          <Select name="estadoCicil" valueDisabled="Estado Civil" errors={errors.estadoCicil} 
+            touched={touched.estadoCicil} optionList={['Solteiro', 'Casado', 'Divorciado', 'Viúvo']} />
         </div>
 
 

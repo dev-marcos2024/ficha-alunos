@@ -20,3 +20,7 @@ body {
     user-select: none;
     color: var(--borda-destaque)!important;
 }
+
+legend{
+    color: #5a5959 !important;
+}

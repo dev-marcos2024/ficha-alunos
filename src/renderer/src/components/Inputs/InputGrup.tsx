@@ -1,11 +1,9 @@
 import { Field } from 'formik'
-import { ReactNode } from 'react'
-
 
 
 interface Props{
     id: string,
-    texto: string | ReactNode
+    texto: string,
     placeholder: string,
     nome: string,
     touched:  boolean | undefined,
@@ -27,7 +25,7 @@ export const InputGroup = ({ id, texto, placeholder, nome,  touched, errors  }: 
           aria-label="Sizing example input"
           aria-describedby="inputGroup-sizing-lg"
           name={nome}
-          className={`form-control ${touched && errors ? 'is-invalid' : ''} ${touched && !errors ? 'is-valid' : ''} `}
+          className={`form-control ${touched && errors ? 'is-invalid' : ''} ${touched && !errors ? 'is-valid' : ''}`}
         />
       </div>
     )
