@@ -7,7 +7,7 @@
 
 .fieldset{
     border-radius: 1rem;
-    background-color: aliceblue;
+    background-color: white;
     padding: 2rem;
     display: flex;
     flex-direction: column;

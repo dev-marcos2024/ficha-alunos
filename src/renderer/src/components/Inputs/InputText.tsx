@@ -1,24 +1,30 @@
+import { Field } from 'formik'
+import { ReactNode } from 'react'
+
+
 
 interface Props{
-    id: string,
-    texto: string
-    isValido: boolean
-    placeholder: string,
+    texto: string | ReactNode
+    placeholder: string | undefined,
+    nome: string,
+    touched:  boolean | undefined,
+    errors: string | undefined
     tipo: string
 }
  
 
-export const InputText = ({ id, texto, isValido, placeholder, tipo }: Props)=>{
+export const InputText = ({texto, placeholder, nome,  touched, errors, tipo }: Props)=>{
 
     return (
         <div className="form-floating mb-3">
-            <input 
-            type={tipo} 
-            className= {`form-control ${isValido? 'is-valid' : 'is-invalid'}`} 
-            id={id}
+            <Field
+            type={tipo}
+            id={nome}
             placeholder={placeholder}
+            name={nome}
+            className={`form-control ${touched && errors ? 'is-invalid' : ''} ${touched && !errors ? 'is-valid' : ''} `}
         />
-            <label htmlFor={id}>{texto}</label>
+            <label htmlFor={nome}>{texto}</label>
         </div>
     )
 }

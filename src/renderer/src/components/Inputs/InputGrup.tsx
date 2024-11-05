@@ -1,32 +1,34 @@
-import { useFormContext } from '../../contexts/ContextForm'
-import { AlunoInfo } from '../../../../types/SchemaForm'
-import { data } from 'autoprefixer'
+import { Field } from 'formik'
+import { ReactNode } from 'react'
+
+
 
 interface Props{
     id: string,
-    texto: string
+    texto: string | ReactNode
     placeholder: string,
-    name: keyof AlunoInfo;
+    nome: string,
+    touched:  boolean | undefined,
+    errors: string | undefined
 }
  
 
-export const InputGroup = ({ id, texto, placeholder, name }: Props)=>{
-    const {register, formState: { errors} } = useFormContext();
+export const InputGroup = ({ id, texto, placeholder, nome,  touched, errors  }: Props)=>{
 
-
-  console.log();
     return (
-        <div className= 'input-group input-group-lg' >
-            <span className="input-group-text" id={id}>{texto}</span>
-            <input
-              {...register(name)}
-                type='text'
-                className= {`form-control ${errors[name]? 'is-invalid' : 'is-valid'}`}
-                id={id}
-                placeholder={placeholder}
-                aria-label="Sizing example input"
-                aria-describedby="inputGroup-sizing-lg"
-            />
-        </div>
+      <div className="input-group input-group-lg">
+        <span className="input-group-text text-gray-600" id={id}>
+          {texto}
+        </span>
+        <Field
+          type="text"
+          id={id}
+          placeholder={placeholder}
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-lg"
+          name={nome}
+          className={`form-control ${touched && errors ? 'is-invalid' : ''} ${touched && !errors ? 'is-valid' : ''} `}
+        />
+      </div>
     )
 }

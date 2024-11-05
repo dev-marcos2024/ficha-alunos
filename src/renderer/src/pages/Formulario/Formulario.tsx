@@ -1,21 +1,28 @@
-import { AlunoInfo} from '../../../../types/SchemaForm';
-import { DadosAlunos } from "./DadosAlunos";
-import styles from './style.module.css'
-import { useFormContext } from '../../contexts/ContextForm'
+import React from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { AlunoSchema, InitialDateForm } from '../../models/SchemaForm'
+import { DadosAlunos } from './DadosAlunos'
 
-export const Formulario = ()=>{
-  const { handleSubmit} = useFormContext();
 
-  const onSubmit = (data: AlunoInfo) => {
-    console.log(data);
-  };
+export const Formulario = () => {
+  return (
+    <Formik
+      initialValues={InitialDateForm}
+      validationSchema={AlunoSchema}
+      onSubmit={(values) => {
+        console.log('Dados do aluno:', values);
+      }}
+    >
+      {({ touched, errors }) => (
 
-  return(
-    <div className={`container`}>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <DadosAlunos/>
-        <button type="submit">Enviar</button>
-      </form>
-    </div>
-  )
-}
+        <Form className="container mt-4">
+          <div className="form-group">
+            <DadosAlunos errors={errors} touched={touched}/>
+          </div>
+          <button type="submit" className="btn btn-primary">Enviar</button>
+        </Form>
+      )}
+    </Formik>
+  );
+};
+
