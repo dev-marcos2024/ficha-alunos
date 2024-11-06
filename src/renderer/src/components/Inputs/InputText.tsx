@@ -16,7 +16,7 @@ interface Props{
 export const InputText = ({texto, placeholder, nome,  touched, errors, tipo }: Props)=>{
 
     return (
-        <div className="form-floating mb-3">
+        <div className="form-floating">
             <Field
             type={tipo}
             id={nome}

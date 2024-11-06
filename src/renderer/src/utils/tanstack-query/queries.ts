@@ -2,7 +2,7 @@ import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { queryClient } from "./queryClient";
 
 // Hook para buscar o endereco via cep
-export const useUf = ():UseQueryResult<string[], Error> => {
+export const useUf = () => {
   return useQuery({
     queryKey: ['uf'],  
     queryFn: () => window.api.getUF(),

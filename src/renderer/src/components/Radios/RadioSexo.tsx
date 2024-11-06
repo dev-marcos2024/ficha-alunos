@@ -12,10 +12,10 @@ export const AlunosSexo = ({nome}: Props) => {
 
             <div className="btn-group" role="group" aria-label="Basic radio toggle button group">
                 <Field value= "feminino" type="radio" className="btn-check is-valid" name={nome} id="sexoRadio1" autoComplete="off"/>
-                <label className="btn btn-outline-secondary" htmlFor="sexoRadio1">Feminino</label>
+                <label className="btn btn-outline-primary" htmlFor="sexoRadio1">Feminino</label>
 
                 <Field value= "masculino" type="radio" className="btn-check is-invalid" name={nome} id="sexoRadio2" autoComplete="off"/>
-                <label className="btn btn-outline-secondary" htmlFor="sexoRadio2">Masculino</label>
+                <label className="btn btn-outline-primary" htmlFor="sexoRadio2">Masculino</label>
             </div>
             <ErrorMessage name={nome} component="div" className="text-red-600" />
         </fieldset>

@@ -32,6 +32,7 @@
     "bootstrap-icons": "^1.11.3",
     "electron-router-dom": "^1.0.5",
     "formik": "^2.4.6",
+    "react-bootstrap": "^2.10.5",
     "react-hook-form": "^7.53.1",
     "react-router-dom": "^6.27.0",
     "vite-plugin-static-copy": "^2.0.0",

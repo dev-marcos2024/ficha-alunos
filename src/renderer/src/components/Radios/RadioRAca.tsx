@@ -12,22 +12,22 @@ export const RadioRaca = ({nome}: Props) => {
 
             <div className="btn-group" role="group" aria-label="Basic radio toggle button group">
                 <Field value= "branca" type="radio" className="btn-check is-valid" name={nome} id="racaRadio1" autoComplete="off"/>
-                <label className="btn btn-outline-secondary" htmlFor="racaRadio1">BRANCA</label>
+                <label className="btn btn-outline-primary" htmlFor="racaRadio1">BRANCA</label>
 
                 <Field value= "preta" type="radio" className="btn-check is-invalid" name={nome} id="racaRadio2" autoComplete="off"/>
-                <label className="btn btn-outline-secondary" htmlFor="racaRadio2">PRETA</label>
+                <label className="btn btn-outline-primary" htmlFor="racaRadio2">PRETA</label>
 
                 <Field value= "parda" type="radio" className="btn-check" name={nome} id="racaRadio3" autoComplete="off"/>
-                <label className="btn btn-outline-secondary" htmlFor="racaRadio3">PARDA</label>
+                <label className="btn btn-outline-primary" htmlFor="racaRadio3">PARDA</label>
 
                 <Field value= "amarela" type="radio" className="btn-check" name={nome} id="racaRadio4" autoComplete="off"/>
-                <label className="btn btn-outline-secondary" htmlFor="racaRadio4">AMARELA</label>
+                <label className="btn btn-outline-primary" htmlFor="racaRadio4">AMARELA</label>
 
                 <Field value= "indigina" type="radio" className="btn-check" name={nome} id="racaRadio5" autoComplete="off"/>
-                <label className="btn btn-outline-secondary" htmlFor="racaRadio5">INÍDIGINA</label>
+                <label className="btn btn-outline-primary" htmlFor="racaRadio5">INÍDIGINA</label>
 
                 <Field value= "nao declarada" type="radio" className="btn-check" name={nome} id="racaRadio6" autoComplete="off"/>
-                <label className="btn btn-outline-secondary is-invalid" htmlFor="racaRadio6">NAO DECLARADA</label>
+                <label className="btn btn-outline-primary is-invalid" htmlFor="racaRadio6">NAO DECLARADA</label>
             </div>
             <ErrorMessage name={nome} component="div" className="text-red-600" />
         </fieldset>

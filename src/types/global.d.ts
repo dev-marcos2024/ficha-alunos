@@ -4,7 +4,7 @@ declare global {
   interface Window {
     electron: ElectronAPI;
     api: {
-      getUF: () => Promise<any>,
+      getUF: () => Promise<string[]>,
       getCidades: (uf:string) => Promise<any>,
       getEndereco: (cep:string) => Promise<any>,
     };
