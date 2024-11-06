@@ -12,6 +12,7 @@ export const AlunoSchema = Yup.object().shape({
   alunoSexo: Yup.string().required('É obrigatório selecionar o Genero do aluno.'),
   estadoCicil: Yup.string().required('É obrigatório selecionar o Estado Civil do aluno.'),
   alunoNacionalidade: Yup.string().required(),
+  UfNascimento: Yup.string().required().min(2)
 });
 
 // Estado inicial com valores apropriados para os radios
@@ -26,6 +27,7 @@ export const InitialDateForm = {
   alunoSexo: '',
   estadoCicil:'',
   alunoNacionalidade: '',
+  UfNascimento: '',
 };
 
 export type TypeForm = typeof InitialDateForm;

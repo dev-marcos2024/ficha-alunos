@@ -1,0 +1,26 @@
+.areaSearch{
+    position: relative;
+}
+
+.dropdownList {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: white;
+    border: 1px solid #ccc;
+    z-index: 1000;
+    border-radius: 8px;
+  }
+  
+  .dropdownItem {
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  .dropdownItem:hover {
+    background-color: #f0f0f0;
+  }
+  

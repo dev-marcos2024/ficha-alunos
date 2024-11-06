@@ -1,4 +1,4 @@
-import { DropdownsSearch } from "../../components/Dropdowns/Dropdowns"
+import { SelectSearch } from "../../components/Selects/SelectSearch"
 import { InputGroup } from "../../components/Inputs/InputGrup";
 import { InputText } from "../../components/Inputs/InputText";
 import { useCidades, useUf } from "../../utils/tanstack-query/queries"
@@ -65,17 +65,16 @@ export const DadosAlunos = ({touched, errors}:Props)=>{
                 errors={errors.alunoNacionalidade}
               />
             </div>
-            <div className="flex-1 bg-amber-200">
+            <div className="flex-1">
               <Select name="estadoCicil" valueDisabled="Estado Civil" errors={errors.estadoCicil}
                       touched={touched.estadoCicil} optionList={['Solteiro', 'Casado', 'Divorciado', 'Viúvo']} />
             </div>
           </div>
 
           <div className="flex">
-
+            <SelectSearch nome={'UfNascimento'} texto="UF De Nascimento" list={ufs.data} touched={touched.UfNascimento} errors={errors.UfNascimento}/>
           </div>
 
-          <DropdownsSearch nome={'Alo'} list={ufs.data} texto={'Cidade'}/>
         </div>
       </fieldset>
     )
