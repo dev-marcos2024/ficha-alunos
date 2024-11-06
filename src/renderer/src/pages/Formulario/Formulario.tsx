@@ -12,11 +12,11 @@ export const Formulario = () => {
         console.log('Dados do aluno:', values);
       }}
     >
-      {({ touched, errors }) => (
+      {({ touched, errors , setFieldTouched, setFieldError}) => (
 
         <Form className="container mt-4">
           <div className="form-group">
-            <DadosAlunos errors={errors} touched={touched}/>
+            <DadosAlunos errors={errors} touched={touched} setErros={setFieldError} setTouched={setFieldTouched}/>
           </div>
           <button type="submit" className="btn btn-primary">Enviar</button>
         </Form>

@@ -12,12 +12,17 @@ import { Select } from "../../components/Selects/Select";
 
 interface Props{
   touched:  FormikTouched<TypeForm>,
-  errors: FormikErrors<TypeForm>
+  errors: FormikErrors<TypeForm>,
+  setTouched: (field: string, isTouched?: boolean, shouldValidate?: boolean) => void
+  setErros: (field: string, message?: string) => void
 }
 
-export const DadosAlunos = ({touched, errors}:Props)=>{
+export const DadosAlunos = ({touched, errors, setTouched, setErros}:Props)=>{
     const ufs = useUf();
-    const cidades = useCidades('SP');
+
+    const handleCidades= (uf: string): string[] | undefined =>{
+      return useCidades(uf).data
+    };
 
 
     return (
@@ -71,8 +76,27 @@ export const DadosAlunos = ({touched, errors}:Props)=>{
             </div>
           </div>
 
-          <div className="flex">
-            <SelectSearch nome={'UfNascimento'} texto="UF De Nascimento" list={ufs.data} touched={touched.UfNascimento} errors={errors.UfNascimento}/>
+          <div className="flex gap-6">
+            <div className="col">
+              <SelectSearch nome={'municipioNascimento'} texto="Município de Nascimento:" setErros={setErros} setTouched={setTouched}
+                list={handleCidades} touched={touched.municipioNascimento} errors={errors.municipioNascimento}
+              />
+            </div>
+            <div className="col max-w-32">
+              <SelectSearch nome={'UfNascimento'} texto="Estado" setErros={setErros} setTouched={setTouched}
+                list={ufs.data} touched={touched.UfNascimento} errors={errors.UfNascimento}
+              />
+            </div>
+            <div className="col">
+              <SelectSearch nome={'comarcaNascimento'} texto="Município/Comarca de Nascimento:" setErros={setErros} setTouched={setTouched}
+                list={handleCidades} touched={touched.comarcaNascimento} errors={errors.comarcaNascimento}
+              />
+            </div>
+            <div className="col max-w-32">
+              <SelectSearch nome={'ufComarcaNascimento'} texto="Estado" setErros={setErros} setTouched={setTouched}
+                list={ufs.data} touched={touched.ufComarcaNascimento} errors={errors.ufComarcaNascimento}
+              />
+            </div>
           </div>
 
         </div>

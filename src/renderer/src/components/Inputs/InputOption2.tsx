@@ -13,12 +13,12 @@ interface Props {
 export const InputOption2 = ({ texto1, texto2, texto3, nome, touched, errors }: Props) => {
     return (
         <div className="flex gap-2">
-            <div className="btn-group p-0 w-auto mb-3" role="group" aria-label="Basic radio toggle button group">
+            <div className="btn-group p-0 w-auto" role="group" aria-label="Basic radio toggle button group">
                 <Field
                     type="radio" name={nome}  value="RG" id={`id${nome}1`} autoComplete="off"
                     className="btn-check" 
                 />
-                <label className="btn btn-outline-primary align-content-center" htmlFor={`id${nome}1`} >
+                <label className="btn btn-outline-primary align-content-center " htmlFor={`id${nome}1`} >
                     {texto1}
                 </label>
 

@@ -17,7 +17,7 @@ export const InputText = ({texto, placeholder, nome,  touched, errors, tipo }: P
 
     return (
         <div className="form-floating">
-            <Field
+        <Field
             type={tipo}
             id={nome}
             placeholder={placeholder}
