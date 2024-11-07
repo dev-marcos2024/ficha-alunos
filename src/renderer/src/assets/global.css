@@ -5,11 +5,12 @@
 @tailwind utilities;
 
 :root {
-    --fundo: #040D12; /* Fundo do formulário */
-    --secundario: #5C8374; /* Área secundária, como campos de entrada */
-    --botoes: #183D3D; /* Cor de fundo dos botões */
-    --borda-destaque: #183D3D; /* Cor para bordas e elementos de destaque */
-    --text: #6e887e;
+    --fundo: #0B2447; /* Fundo do formulário */
+    --secundario: #A5D7E8; /* Área secundária, como campos de entrada */
+    --botoes: #19376D; /* Cor de fundo dos botões */
+    --borda-destaque: #19376D; /* Cor para bordas e elementos de destaque */
+    --text: #4b4a4a;
+    --text2: #576CBC; 
 }
 
 body {
@@ -18,9 +19,26 @@ body {
     justify-content: center;
     background-color: var(--fundo)!important;
     user-select: none;
-    color: var(--borda-destaque)!important;
+    color: var(--text)!important;
 }
 
 legend{
-    color: #5a5959 !important;
+    color: #494848 !important;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+}
+
+.legendAxiliar{
+    color: var(--text2) !important;
+    margin-bottom: 8px !important;
+    font-size: 1.6rem;
+}
+
+.fieldset{
+    border-radius: 1rem;
+    background-color: var(--secundario) !important;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
 }

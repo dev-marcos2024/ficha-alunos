@@ -2,7 +2,7 @@ import { SelectSearch } from "../../components/Selects/SelectSearch"
 import { InputGroup } from "../../components/Inputs/InputGrup";
 import { InputText } from "../../components/Inputs/InputText";
 import styles from './style.module.css'
-import { FormikErrors, FormikTouched } from 'formik'
+import { FormikErrors, FormikTouched, useFormikContext } from 'formik'
 import { TypeForm } from '@renderer/src/models/SchemaForm'
 import { InputOption2 } from "../../components/Inputs/InputOption2";
 import { RadioRaca } from "../../components/Radios/RadioRAca";
@@ -12,6 +12,7 @@ import { useUf } from "../../utils/tanstack-query/queries"
 import { useState } from 'react'
 import { Certidao } from '../../components/Certidao/Index'
 import { InputDate } from '../../components/Inputs/InputDate'
+import { InputRaMask } from "../../components/Inputs/InputsMask/InputMackRa";
 
 
 interface Props{
@@ -22,6 +23,8 @@ interface Props{
 }
 
 export const DadosAlunos = ({touched, errors, setTouched, setErros}:Props)=>{
+
+  const {values} = useFormikContext<TypeForm>()
     const [uf1, setUf1] = useState('');
     const [uf2, setUf2] = useState('');
     const ufs = useUf();
@@ -29,14 +32,13 @@ export const DadosAlunos = ({touched, errors, setTouched, setErros}:Props)=>{
 
 
     return (
-      <fieldset className={styles.fieldset}>
+      <fieldset className={`fieldset`}>
         <legend className='text-gray-400'>Dados do Aluno</legend>
 
         <div className="flex flex-col gap-6">
           <div className="row">
             <div className='col-5'>
-              <InputGroup id="ra" placeholder="Digite o RA" texto="RA" nome='ra' touched={touched.ra}
-                          errors={errors.ra} />
+              <InputRaMask nome='ra' touched={touched.ra}errors={errors.ra} valor={values.ra} />
             </div>
             <div className='col-4'>
               <InputGroup id="rm" placeholder="Digite o RM" texto="RM" nome='rm' touched={touched.rm}
@@ -62,7 +64,7 @@ export const DadosAlunos = ({touched, errors, setTouched, setErros}:Props)=>{
                        touched={touched.DataNascimentoAluno} errors={errors.DataNascimentoAluno} />
           </div>
 
-          <div className="flex justify-between">
+          <div className="flex justify-evenly">
             <RadioRaca nome="alunoRaca" />
             <AlunosSexo nome="alunoSexo" />
           </div>

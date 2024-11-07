@@ -6,13 +6,13 @@ import { InputTelefoneMask } from "../../Inputs/InputsMask/InputMaskTelefone";
 
 
 
-export const FiliacaoPai = () => {
+export const FiliacaoMae = () => {
     const {values, errors, touched} = useFormikContext<TypeForm>();
 
 
     return (
         <fieldset className="">
-            <legend className="legendAxiliar">Pai</legend>
+            <legend className="legendAxiliar">Mãe</legend>
 
             <div className="flex flex-col gap-6">
                 <div className="flex">

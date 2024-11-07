@@ -8,7 +8,7 @@ interface Props {
 export const RadioRaca = ({nome}: Props) => {
     return (
         <fieldset className="flex flex-column">
-            <legend>Raca/COR</legend>
+            <legend className='legendAxiliar'>Raca/COR</legend>
 
             <div className="btn-group" role="group" aria-label="Basic radio toggle button group">
                 <Field value= "branca" type="radio" className="btn-check is-valid" name={nome} id="racaRadio1" autoComplete="off"/>
