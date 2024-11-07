@@ -1,4 +1,5 @@
-import { ErrorMessage, Field } from "formik"
+import { ErrorMessage, Field, useFormikContext } from 'formik'
+import React, { ChangeEvent, Dispatch, useState } from 'react'
 
 
 interface Props{
@@ -7,23 +8,34 @@ interface Props{
     touched: boolean | undefined,
     valueDisabled: string,
     optionList: string[] | undefined,
+    setSelected?: Dispatch<React.SetStateAction<string>>
 }
 
 
-export const Select = ({name, touched, errors, valueDisabled, optionList}: Props)=>{
+export const Select = ({name, touched, errors, valueDisabled, optionList, setSelected}: Props)=>{
+    const [valor, setValor] = useState('')
+    const { setFieldValue, setFieldTouched, setFieldError } = useFormikContext();
 
+    const handleChange = (event: string) => {
+      setSelected && setSelected(event);
+      setValor(event);
+      setFieldTouched(name, true);
+      setFieldError(name, 'O campo deve conter mais de 2 caracteres');
+      setFieldValue(name, event)
+    }
     return (
         <div className="h-[100%]">
             <Field
               as="select"
+              value={valor}
               name={name}
               id={`${name}Id`}
               className={`form-select form-select-lg h-[100%]  ${touched && errors ? "is-invalid" : ""} ${touched && !errors ? "is-valid" : ""}`}
               aria-describedby={`${name}Feedback`}
-              required
+              onChange={(event: React.ChangeEvent<HTMLSelectElement>) => handleChange(event.target.value)}
             >
               <option value="" disabled>{valueDisabled}</option>
-              {optionList && optionList.map((item, index)=> (
+              {optionList && optionList.sort().map((item, index)=> (
                 <option key={index} value={item}>{item}</option>
               ))}
             </Field>

@@ -1,7 +1,6 @@
 import { SelectSearch } from "../../components/Selects/SelectSearch"
 import { InputGroup } from "../../components/Inputs/InputGrup";
 import { InputText } from "../../components/Inputs/InputText";
-import { useCidades, useUf } from "../../utils/tanstack-query/queries"
 import styles from './style.module.css'
 import { FormikErrors, FormikTouched } from 'formik'
 import { TypeForm } from '@renderer/src/models/SchemaForm'
@@ -9,6 +8,11 @@ import { InputOption2 } from "../../components/Inputs/InputOption2";
 import { RadioRaca } from "../../components/Radios/RadioRAca";
 import { AlunosSexo } from "../../components/Radios/RadioSexo";
 import { Select } from "../../components/Selects/Select";
+import { useUf } from "../../utils/tanstack-query/queries"
+import { useState } from 'react'
+import { Certidao } from '../../components/Certidao/Index'
+import { InputDate } from '../../components/Inputs/InputDate'
+
 
 interface Props{
   touched:  FormikTouched<TypeForm>,
@@ -18,11 +22,10 @@ interface Props{
 }
 
 export const DadosAlunos = ({touched, errors, setTouched, setErros}:Props)=>{
+    const [uf1, setUf1] = useState('');
+    const [uf2, setUf2] = useState('');
     const ufs = useUf();
 
-    const handleCidades= (uf: string): string[] | undefined =>{
-      return useCidades(uf).data
-    };
 
 
     return (
@@ -54,6 +57,9 @@ export const DadosAlunos = ({touched, errors, setTouched, setErros}:Props)=>{
               placeholder="Digite o Nis"
               texto="Nis do Aluno"
               tipo="text" nome='alunoNis' touched={touched.alunoNis} errors={errors.alunoNis} />
+
+            <InputDate nome='DataNascimentoAluno' text='Data Nascimento'
+                       touched={touched.DataNascimentoAluno} errors={errors.DataNascimentoAluno} />
           </div>
 
           <div className="flex justify-between">
@@ -77,26 +83,33 @@ export const DadosAlunos = ({touched, errors, setTouched, setErros}:Props)=>{
           </div>
 
           <div className="flex gap-6">
+
             <div className="col">
               <SelectSearch nome={'municipioNascimento'} texto="Município de Nascimento:" setErros={setErros} setTouched={setTouched}
-                list={handleCidades} touched={touched.municipioNascimento} errors={errors.municipioNascimento}
+                 touched={touched.municipioNascimento} errors={errors.municipioNascimento} uf={uf1}
               />
             </div>
-            <div className="col max-w-32">
-              <SelectSearch nome={'UfNascimento'} texto="Estado" setErros={setErros} setTouched={setTouched}
-                list={ufs.data} touched={touched.UfNascimento} errors={errors.UfNascimento}
-              />
+
+            <div className="col max-w-40">
+              <Select name="UfNascimento" valueDisabled="Estado" errors={errors.UfNascimento}
+                      touched={touched.UfNascimento} optionList={ufs.data} setSelected={setUf1} />
             </div>
+
             <div className="col">
               <SelectSearch nome={'comarcaNascimento'} texto="Município/Comarca de Nascimento:" setErros={setErros} setTouched={setTouched}
-                list={handleCidades} touched={touched.comarcaNascimento} errors={errors.comarcaNascimento}
+                 touched={touched.comarcaNascimento} errors={errors.comarcaNascimento} uf={uf2}
               />
             </div>
-            <div className="col max-w-32">
-              <SelectSearch nome={'ufComarcaNascimento'} texto="Estado" setErros={setErros} setTouched={setTouched}
-                list={ufs.data} touched={touched.ufComarcaNascimento} errors={errors.ufComarcaNascimento}
-              />
+
+            <div className="col max-w-40">
+              <Select name="ufComarcaNascimento" valueDisabled="Estado" errors={errors.ufComarcaNascimento}
+                      touched={touched.ufComarcaNascimento} optionList={ufs.data} setSelected={setUf2} />
             </div>
+
+          </div>
+
+          <div className="flex">
+            <Certidao/>
           </div>
 
         </div>

@@ -22,6 +22,13 @@ export const AlunoSchema = Yup.object().shape({
   municipioNascimento: Yup.string().required(),
   comarcaNascimento: Yup.string().required(),
   ufComarcaNascimento: Yup.string().length(2, 'UF deve ter 2 caracteres.').required('Campo obrigatório.'),
+  certidaoNova: Yup.string(),
+  certidaoDistrito: Yup.string(),
+  certidaoFolha: Yup.string(),
+  certidaoLivro: Yup.string(),
+  certidaoNumero: Yup.string(),
+  OpcaoCertidao: Yup.string(),
+  DataNascimentoAluno: Yup.date().required()
 });
 
 // Estado inicial com valores apropriados para os radios
@@ -40,9 +47,17 @@ export const InitialDateForm = {
   municipioNascimento: '',
   comarcaNascimento: '',
   ufComarcaNascimento: '',
+  certidaoNova: '',
+  certidaoDistrito:'',
+  certidaoFolha: '',
+  certidaoLivro: '',
+  certidaoNumero: '',
+  OpcaoCertidao: 'Nova',
+  DataNascimentoAluno: ''
 };
 
 export type TypeForm = typeof InitialDateForm;
+
 
 
 

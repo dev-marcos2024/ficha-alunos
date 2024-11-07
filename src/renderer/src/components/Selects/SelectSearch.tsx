@@ -1,25 +1,27 @@
-import { useEffect, useState } from "react";
+import React, { Dispatch, useEffect, useState } from 'react'
 import style from './style.module.css';
 import { normalizeString } from "../../utils/ExpRegular";
 import { Field, useField, useFormikContext } from "formik";
+import { useCidades} from "../../utils/tanstack-query/queries"
 
 interface Props {
     nome: string;
-    list: string[] | undefined | ((uf: string) => string[] | undefined);
     texto: string;
     touched: boolean | undefined;
     errors: string | undefined;
     setTouched: (field: string, isTouched?: boolean, shouldValidate?: boolean) => void;
     setErros: (field: string, message?: string) => void;
+    uf: string
 }
 
-export const SelectSearch = ({ nome, list, texto, touched, errors, setTouched, setErros }: Props) => {
+export const SelectSearch = ({ nome,  texto, touched, errors, setTouched, setErros, uf}: Props) => {
     const [listFilter, setListFilter] = useState<string[]>([]);
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedValue, setSelectedValue] = useState('');
     const [valor, setValor] = useState('');
+    const list = useCidades(uf).data
 
-    const { setFieldValue } = useFormikContext();
+
+    const { setFieldValue, } = useFormikContext();
 
     useEffect(() => {
         if (list) {
@@ -44,56 +46,47 @@ export const SelectSearch = ({ nome, list, texto, touched, errors, setTouched, s
     };
 
     const handleSelect = (item: string) => {
-        if (item.length === 2) {
-            setTouched(nome, true);
-            setErros(nome, 'O campo deve conter mais de 2 caracteres');
-        } else {
-            setTouched(nome, false);
-            setErros(nome, undefined);
-        }
-        setSelectedValue(item);
+        if(item === '') return
+
+        setTouched(nome, true);
+        setErros(nome, 'O campo deve conter mais de 2 caracteres');
         setValor(item);
         setFieldValue(nome, item); // Atualiza o valor selecionado no Formik
         setIsOpen(false);
     };
 
     return (
-        <div className={style.areaSearch}>
-            <div className="form-floating">
-                <Field
-                    name={nome}
-                    id={`id${nome}`}
-                    type="text"
-                    className={`form-control ${style.inputSearch} ${touched && errors ? 'is-invalid' : ''} ${touched && !errors ? 'is-valid' : ''}`}
-                    placeholder="Pesquisar..."
-                    value={valor}
-                    onChange={(e: any) => handleFilter(e.currentTarget.value)}
-                    onClick={toggleDropdown}
-                    onBlur={() => setTimeout(() => setIsOpen(false), 300)}
-                />
-                <label htmlFor={`id${nome}`}>{texto}</label>
-            </div>
-
-            {isOpen && (
-                <ul className={style.dropdownList}>
-                    {listFilter.length > 0 ? (
-                        listFilter.map((item, i) => (
-                            <li
-                                key={i}
-                                className={style.dropdownItem}
-                                onClick={() => handleSelect(item)}
-                            >
-                                {item}
-                            </li>
-                        ))
-                    ) : (
-                        <li className={style.dropdownItem}>Nenhum item encontrado</li>
-                    )}
-                </ul>
-            )}
-            
+      <div className={style.areaSearch}>
+        <div className="form-floating">
+          <Field
+            name={nome}
+            id={`id${nome}`}
+            type="text"
+            className={`form-control ${style.inputSearch} ${touched && errors ? 'is-invalid' : ''} ${touched && !errors ? 'is-valid' : ''}`}
+            placeholder="Pesquisar..."
+            value={valor}
+            onChange={(e: any) => handleFilter(e.currentTarget.value)}
+            onClick={toggleDropdown}
+            onBlur={() => setTimeout(() => setIsOpen(false), 300)}
+          />
+          <label htmlFor={`id${nome}`}>{texto}</label>
         </div>
-    );
+
+        {isOpen && (
+          <ul className={style.dropdownList}>
+            {listFilter.length > 0 ? (
+              listFilter.sort().map((item, i) => (
+                <li key={i} className={style.dropdownItem} onClick={() => handleSelect(item)}>
+                  {item}
+                </li>
+              ))
+            ) : (
+              <li className={`${style.dropdownItem} text-red-700 font-bold`}>Selecione Primeiro o Estado</li>
+            )}
+          </ul>
+        )}
+      </div>
+    )
 };
 
 

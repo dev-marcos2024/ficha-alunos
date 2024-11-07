@@ -13,7 +13,7 @@ export const useUf = () => {
 export const useCidades = (uf:string) => {
   return useQuery({
     queryKey: ['cidades', uf],  
-    queryFn: () => window.api.getCidades(uf.toUpperCase().trim()),
+    queryFn: (): Promise<string[]> => window.api.getCidades(uf.toUpperCase().trim()),
     enabled: !!uf,  
   });
 };
