@@ -1,7 +1,8 @@
-import { PrimeiraLinha } from './PrimeiraLinha'
 import { useFormikContext } from 'formik'
 import { TypeForm } from '@renderer/src/models/SchemaForm'
-import { SegundaLinha } from '../../components/Endereco/SegundaLinha'
+import { PrimeiraLinha } from './PrimeiraLinha'
+import { SegundaLinha } from './SegundaLinha'
+import { TerceiraLinha } from './TerceiraLinha'
 
 
 export const Index = ()=>{
@@ -15,6 +16,8 @@ export const Index = ()=>{
         <PrimeiraLinha/>
 
         <SegundaLinha/>
+
+        <TerceiraLinha/>
       </div>
 
     </fieldset>
