@@ -1,16 +1,21 @@
 import styles from './style.module.css'
-import avatar from '../../assets/avatar.jpg'
 import logo from '../../assets/logo.jpg'
+import { useFormikContext } from 'formik'
+import { TypeForm } from '../../models/SchemaForm'
+import { useLocation } from 'react-router-dom'
+
 
 export const Header = () =>{
+  const data: TypeForm = useLocation().state;
 
+  
   return (
     <header className={styles.header}>
-      <div className={styles.foto}>
-        <img src={avatar} alt="" />
+      <div className={`${styles.foto}`}>
+        <img className='h-full' src={`local-file://uploads/${data && data.rm}.jpg`} alt="Foto do aluno" />
       </div>
       <div>
-        <img src={logo} alt="" />
+        <img src={logo} alt="Logo Prefeitura" />
       </div>
       <div>
         <p>CEMEB VEREADOR LAERTE RETONDO</p>

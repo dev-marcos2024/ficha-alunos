@@ -36,6 +36,7 @@ export const DadosAlunos = ({touched, errors, setTouched, setErros}:Props)=>{
         <legend className='text-gray-400'>Dados do Aluno</legend>
 
         <div className="flex flex-col gap-6">
+          
           <div className="flex gap-6">
             <div className=''>
               <InputRaMask nome='ra' touched={touched.ra} errors={errors.ra} valor={values.ra} />

@@ -1,12 +1,12 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
-import path,{ join } from 'node:path'
-import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import { createFileRoute, createURLRoute } from 'electron-router-dom'
-import './ipcEnderecos'
+import { app, shell, BrowserWindow, ipcMain, protocol } from 'electron';
+import path, { join } from 'node:path';
+import { electronApp, optimizer, is } from '@electron-toolkit/utils';
+import { createFileRoute, createURLRoute } from 'electron-router-dom';
+import './ipcEnderecos';
+import './ipcSaveFile';
 
-
-function createWindow(): void {
-  // Create the browser window.
+function createWindow() {
+  // Cria a janela principal do aplicativo.
   const mainWindow = new BrowserWindow({
     width: 1400,
     height: 800,
@@ -21,29 +21,27 @@ function createWindow(): void {
     }),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false
+      sandbox: false,
     }
-  })
+  });
 
   mainWindow.on('ready-to-show', () => {
-    mainWindow.show()
-  })
+    mainWindow.show();
+  });
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
-    shell.openExternal(details.url)
-    return { action: 'deny' }
-  })
+    shell.openExternal(details.url);
+    return { action: 'deny' };
+  });
 
   const devServerURL = createURLRoute(process.env['ELECTRON_RENDERER_URL']!, 'main');
   const fileRoute = createFileRoute(join(__dirname, '../renderer/index.html'), 'main');
 
-
-  // HMR for renderer base on electron-vite cli.
-  // Load the remote URL for development or the local html file for production.
+  // Carrega o URL remoto para desenvolvimento ou o arquivo HTML local para produção.
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-    mainWindow.loadURL(devServerURL)
+    mainWindow.loadURL(devServerURL);
   } else {
-    mainWindow.loadFile(...fileRoute)
+    mainWindow.loadFile(...fileRoute);
   }
 
   ipcMain.on('print-request', (event) => {
@@ -55,36 +53,36 @@ function createWindow(): void {
 }
 
 app.whenReady().then(() => {
-  // Set app user model id for windows
-  electronApp.setAppUserModelId('com.electron')
+  // Define o id do modelo de usuário do aplicativo para Windows
+  electronApp.setAppUserModelId('com.electron');
 
+  // Configura o protocolo customizado para servir arquivos da pasta 'uploads'
+  protocol.registerFileProtocol('local-file', (request, callback) => {
+    const url = request.url.replace('local-file://', '');
+    const filePath = path.join(app.getPath('userData'), url); // Caminho completo do arquivo
+    callback({ path: filePath });
+  });
 
-  // see https://github.com/alex8088/electron-toolkit/tree/master/packages/utils
+  // Observa atalhos da janela quando criados
   app.on('browser-window-created', (_, window) => {
-    optimizer.watchWindowShortcuts(window)
-  })
+    optimizer.watchWindowShortcuts(window);
+  });
 
-  // IPC test
-  ipcMain.on('ping', () => console.log('pong'))
+  // Teste de IPC
+  ipcMain.on('ping', () => console.log('pong'));
 
-  createWindow()
+  // Cria a janela principal
+  createWindow();
 
+  // Em macOS, recria a janela quando o ícone do dock é clicado
   app.on('activate', function () {
-    // On macOS it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
-  })
-})
+    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  });
+});
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
+// Fecha o aplicativo quando todas as janelas são fechadas, exceto no macOS
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
-    app.quit()
+    app.quit();
   }
-})
-
-
-// In this file you can include the rest of your app"s specific main process
-// code. You can also put them in separate files and require them here.
+});

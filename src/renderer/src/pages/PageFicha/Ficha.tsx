@@ -6,7 +6,7 @@ import { Actions } from './Acitions'
 
 export const Ficha= ()=>{
   return(
-    <div className={styles.folhaA4}>
+    <div className={`${styles.folhaA4} my-12`}>
       <Actions/>
       <Header />
       <Main />

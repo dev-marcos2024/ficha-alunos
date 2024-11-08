@@ -4,23 +4,22 @@ import { DadosAlunos } from './DadosAlunos'
 import { FiliacaoAluno } from '../../components/Filiacao/Index';
 import { Index } from '../../components/Endereco'
 import { Matricula } from '../../components/Matricula/Matricula';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 
 export const Formulario = () => {
 
+  const navigate = useNavigate();
 
   return (
     <Formik
       initialValues={InitialDateForm}
       validationSchema={AlunoSchema}
       onSubmit={(values) => {
-        console.log('Dados do aluno:', values);
-        // Armazena os dados no sessionStorage (opcional) para serem acessados na próxima página
-        sessionStorage.setItem('dadosAluno', JSON.stringify(values));
-
-        // Redireciona para a página "/ficha"
-        window.location.href = '#/main/ficha';
+        
+        // Navega para a rota "/ficha" e passa os dados como estado
+        navigate('/ficha', { state: values });
 
       }}
     >
@@ -44,6 +43,7 @@ export const Formulario = () => {
           
           <div className="flex p-10 items-center justify-center">
             <button type="submit" className="btn btn-primary w-full p-3">Enviar</button>
+            <Link className="btn btn-outline-danger" to='/ficha'>Ficha</Link>
           </div>
         </Form>
       )}

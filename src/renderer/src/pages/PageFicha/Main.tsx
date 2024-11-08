@@ -1,7 +1,13 @@
 import styles from './style.module.css'
 import { Tabela } from './Tabela'
+import { useLocation } from 'react-router-dom';
 
 export const Main = ()=>{
+
+  const location = useLocation();
+  const dados = location.state;
+
+  console.log(dados)
 
   return (
     <main className={styles.main}>

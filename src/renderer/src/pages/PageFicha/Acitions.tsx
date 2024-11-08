@@ -9,8 +9,7 @@ export const Actions = ()=>{
   function handlePrint() {
     setDisplay(true);
     // @ts-ignore
-    window.customApi.sendPrintRequest();
-
+    window.api.sendPrintRequest();
     setTimeout(() => setDisplay(false), 1000);
   }
 
