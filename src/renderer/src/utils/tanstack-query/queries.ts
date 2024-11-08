@@ -22,7 +22,7 @@ export const useCidades = (uf:string) => {
 export const useEndereco = (cep:string) => {
   return useQuery({
     queryKey: ['endereco', cep],  
-    queryFn: () => window.api.getEndereco(cep),
+    queryFn: (): Promise<ViaCepResponse> => window.api.getEndereco(cep),
     enabled: !!cep,  
   });
 };

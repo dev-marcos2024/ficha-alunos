@@ -2,6 +2,7 @@ import { Formik, Form} from 'formik';
 import { AlunoSchema, InitialDateForm } from '../../models/SchemaForm'
 import { DadosAlunos } from './DadosAlunos'
 import { FiliacaoAluno } from '../../components/Filiacao/Index';
+import { Index } from '../../components/Endereco'
 
 
 export const Formulario = () => {
@@ -21,6 +22,8 @@ export const Formulario = () => {
             <DadosAlunos errors={errors} touched={touched} setErros={setFieldError} setTouched={setFieldTouched}/>
 
             {values.ufComarcaNascimento !== '' && <FiliacaoAluno/>}
+
+            <Index/>
 
           </div>
           <button type="submit" className="btn btn-primary">Enviar</button>

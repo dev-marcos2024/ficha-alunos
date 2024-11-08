@@ -13,7 +13,7 @@ interface Props{
     Texto: string
 }
 
-export const InputTelefoneMask = ({nome,touched, errors, valor, pHolder, Texto, mask}: Props) => {
+export const InputMaskDefalt = ({nome,touched, errors, valor, pHolder, Texto, mask}: Props) => {
     const {setFieldValue, setFieldTouched} = useFormikContext<TypeForm>();
 
     const handleSetValue = (val: string) =>{

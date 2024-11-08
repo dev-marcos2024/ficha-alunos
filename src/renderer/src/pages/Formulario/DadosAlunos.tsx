@@ -1,7 +1,6 @@
 import { SelectSearch } from "../../components/Selects/SelectSearch"
 import { InputGroup } from "../../components/Inputs/InputGrup";
 import { InputText } from "../../components/Inputs/InputText";
-import styles from './style.module.css'
 import { FormikErrors, FormikTouched, useFormikContext } from 'formik'
 import { TypeForm } from '@renderer/src/models/SchemaForm'
 import { InputOption2 } from "../../components/Inputs/InputOption2";
@@ -13,6 +12,7 @@ import { useState } from 'react'
 import { Certidao } from '../../components/Certidao/Index'
 import { InputDate } from '../../components/Inputs/InputDate'
 import { InputRaMask } from "../../components/Inputs/InputsMask/InputMackRa";
+import { InputFile } from '../../components/Inputs/InputFile'
 
 
 interface Props{
@@ -36,13 +36,15 @@ export const DadosAlunos = ({touched, errors, setTouched, setErros}:Props)=>{
         <legend className='text-gray-400'>Dados do Aluno</legend>
 
         <div className="flex flex-col gap-6">
-          <div className="row">
-            <div className='col-5'>
-              <InputRaMask nome='ra' touched={touched.ra}errors={errors.ra} valor={values.ra} />
+          <div className="flex gap-6">
+            <div className=''>
+              <InputRaMask nome='ra' touched={touched.ra} errors={errors.ra} valor={values.ra} />
             </div>
-            <div className='col-4'>
-              <InputGroup id="rm" placeholder="Digite o RM" texto="RM" nome='rm' touched={touched.rm}
-                          errors={errors.rm} />
+            <div className=''>
+              <InputGroup id="rm" placeholder="Digite o RM" texto="RM" nome='rm' touched={touched.rm} errors={errors.rm} />
+            </div>
+            <div className="">
+              <InputFile  nome= 'fotoAluno' touched={touched.fotoAluno} errors={errors.fotoAluno}/>
             </div>
           </div>
 

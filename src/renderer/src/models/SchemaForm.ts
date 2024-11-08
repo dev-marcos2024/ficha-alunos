@@ -4,7 +4,7 @@ const rgRegexCertidao = /^\d{6}\.\d{2}\.\d{2}\.\d{4}\.\d{1}\.\d{5}\.\d{3}\.\d{7}
 const rgRegexCpf = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
 const rgRegexTelefone = /^\(\d{2}\) \d{5}-\d{4}$/;
 const rgRegexRa = /^\d{3}\.\d{3}\.\d{3}-[0-9X]$/;
-
+const rgRegexCep = /^\d{5}-\d{3}$/
 // Definindo o esquema de validação com Yup
 export const AlunoSchema = Yup.object().shape({
   rm: Yup.number().required('O campo RM é obrigatório.'),
@@ -22,37 +22,85 @@ export const AlunoSchema = Yup.object().shape({
   municipioNascimento: Yup.string().required(),
   comarcaNascimento: Yup.string().required(),
   ufComarcaNascimento: Yup.string().length(2, 'UF deve ter 2 caracteres.').required('Campo obrigatório.'),
-  certidaoNova: Yup.string(),
+  certidaoNova: Yup.string().matches(rgRegexCertidao, 'Certidão deve estar no formato 999999.99.99.9999.9.99999.999.9999999.99'),
   certidaoDistrito: Yup.string(),
   certidaoFolha: Yup.string(),
   certidaoLivro: Yup.string(),
   certidaoNumero: Yup.string(),
   OpcaoCertidao: Yup.string(),
   DataNascimentoAluno: Yup.date().required(),
+
   cpfPai: Yup.string()
   .matches(rgRegexCpf, "O CPF deve estar no formato 999.999.999-99."),
   rgPai: Yup.string().min(5),
   nomePai: Yup.string(),
+  dataNascimentoPai: Yup.date(),
   telefonePai: Yup.string()
-        .matches(rgRegexTelefone, 'O número de telefone deve estar no formato (XX) XXXXX-XXXX')
-        .required('O telefone é obrigatório'),
-  emailPai: Yup.string(),
-  certidao: Yup.string()
-        .matches(rgRegexCertidao, 'Certidão deve estar no formato 999999.99.99.9999.9.99999.999.9999999.99')
-        
+        .matches(rgRegexTelefone, 'O número de telefone deve estar no formato (XX) XXXXX-XXXX'),
+
+  emailMae: Yup.string(),
+  cpfMae: Yup.string()
+    .matches(rgRegexCpf, "O CPF deve estar no formato 999.999.999-99."),
+  nomeMae: Yup.string() ,
+  dataNascimentoMae: Yup.date(),
+  telefoneMae: Yup.string()
+    .matches(rgRegexTelefone, 'O número de telefone deve estar no formato (XX) XXXXX-XXXX'),
+  fotoAluno: Yup.mixed(),
+
+  cep: Yup.string()
+          .matches(rgRegexCep, 'CEP deve estar no formato 99999-999')
+          .required('O CEP é obrigatório'),
+  rua: Yup.string().required('Nome da rua é obrigatorio '),
+  enderecoNumero: Yup.number().required('Numero da residencia é obrigatorio'),
+  bairro: Yup.string().required("O bairro é obrigatório"),
+  cidade: Yup.string().required('A cidade é obrigatória'),
 });
 
 // Estado inicial com valores apropriados para os radios
-export let InitialDateForm = {};
+export const InitialDateForm = {
+  rm: '',
+  ra: '',
+  alunoNome: '',
+  alunosRgCpf: '',
+  alunosRgCpfInput: '',
+  alunoNis: '',
+  alunoRaca: '',
+  alunoSexo: '',
+  estadoCicil: '',
+  alunoNacionalidade: '',
+  UfNascimento: '',
+  municipioNascimento: '',
+  comarcaNascimento: '',
+  ufComarcaNascimento: '',
+  certidaoNova: '',
+  certidaoDistrito:'',
+  certidaoFolha: '',
+  certidaoLivro: '',
+  certidaoNumero: '',
+  OpcaoCertidao: 'Nova',
+  DataNascimentoAluno: '',
 
+  cpfPai: '',
+  rgPai: '',
+  nomePai: '',
+  telefonePai: '',
+  emailPai: '',
+  dataNascimentoPai: '',
 
-Object.keys(AlunoSchema.fields).map(item => {
-  if (['OpcaoCertidao'].includes(item)) {
-    InitialDateForm = { ...InitialDateForm, [item]: 'Nova' };
-  } else {
-    InitialDateForm = { ...InitialDateForm, [item]: '' };
-  }
-});
+  cpfMae: '',
+  rgMae: '',
+  nomeMae: '',
+  telefoneMae: '',
+  emailMae: '',
+  dataNascimentoMae: '',
+  fotoAluno: '',
+
+  cep:'',
+  rua: '',
+  enderecoNumero: '',
+  bairro: '',
+  cidade: '',
+};
 
 
 export type TypeForm = typeof InitialDateForm;

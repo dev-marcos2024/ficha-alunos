@@ -24,13 +24,13 @@ export const FiliacaoPai = () => {
                 <div className="flex gap-6">
                     <div className="flex">
                         <InputText nome="dataNascimentoPai" placeholder="Data Nascimento" texto="Data de Nascimento"
-                            tipo="date" errors={errors.nomePai} touched={touched.nomePai}
+                            tipo="date" errors={errors.dataNascimentoPai} touched={touched.dataNascimentoPai}
                         />
                     </div>
 
                     <div className="flex">
                         <InputText nome="rgPai" placeholder="Digite o Rg" texto="Digite o Rg do Pai"
-                        tipo="text" errors={errors.nomePai} touched={touched.nomePai}
+                        tipo="text" errors={errors.rgPai} touched={touched.rgPai}
                     />
                     </div>
 
@@ -48,7 +48,7 @@ export const FiliacaoPai = () => {
 
                 <div className="flex max-w-2xl">
                     <InputText nome="emailPai" placeholder="Digite o email" texto="Digite o email do Pai"
-                        tipo="text" errors={errors.nomePai} touched={touched.nomePai}
+                        tipo="text" errors={errors.emailPai} touched={touched.emailPai}
                     />
                 </div>
             </div>    

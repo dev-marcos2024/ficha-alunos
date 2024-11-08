@@ -1,4 +1,4 @@
-import { FiliacaoMae } from './FiliacaoPai/Mae'
+import { FiliacaoMae } from './FiliacaoMae/Mae'
 import { FiliacaoPai } from './FiliacaoPai/Pai'
 import styles from './style.module.css'
 
