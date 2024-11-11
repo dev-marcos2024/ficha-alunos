@@ -90,7 +90,7 @@ export const AlunoSchema = Yup.object().shape({
   fotoAluno: Yup.mixed(),
 });
 
-// // Estado inicial do formulário
+// Estado inicial do formulário
 export const InitialDateForm = {
   rm: '',
   ra: '',

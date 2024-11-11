@@ -10,9 +10,9 @@ declare global {
       uploadFile: (file: CustomFile) => Promise<any>,
       sendPrintRequest: () => Promise<any>,
       getHistoricoCadastro: () => Promise<any>,
-      getAluno: ()=> Promise<any>,
-      updateAluno: ()=> Promise<any>,
-      insertAluno: (doc: Aluno)=>Promise<PouchDB.Core.Response | void>,
+      getAluno: (id: strin)=> Promise<any>,
+      updateAluno: (id: string, data: Aluno)=> Promise<any>,
+      insertAluno: (doc: Aluno, key: string)=>Promise<PouchDB.Core.Response | void>,
       insertFromListAlunos: () => Promise<any>
     };
     customApi: {

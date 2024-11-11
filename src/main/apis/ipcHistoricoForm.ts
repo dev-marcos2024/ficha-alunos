@@ -3,8 +3,8 @@ import PouchDB from 'pouchdb'
 import path from 'node:path'
 import fs from 'node:fs'
 import {TableAluno, Aluno} from '../../types/TypeCadastro';
-import {randomUUID} from 'node:crypto'
 import {listDataAlunos} from './utils/extrairPdf'
+import {TypeForm} from '../../renderer/src/models/SchemaForm'
 
 // Diretorio da base de dados Histórico de matricula.
 const dbDir = path.join(app.getPath('userData'), 'databases');
@@ -15,43 +15,64 @@ if (!fs.existsSync(dbDir)) {
 }
 
 // Iniciando o banco de dados
-const db = new PouchDB<TableAluno>(dbDir)
+const db = new PouchDB<TableAluno | TypeForm>(dbDir)
 
-// COMUNICACAO entre main e renderer
+//===========> COMUNICACAO MAIN E RENDERER <=====================================================
+
+// Inserir alunos da pasta aqruivos baixadoS do SED
 ipcMain.handle('insertFromListAlunos', async ()=>{
     const data  = await listDataAlunos();
-
     if (data.length !== 0){
-      const result = data.map(item => handleInsert(item as Aluno))
-      return result[0]
+      data.map((item: Aluno) => handleInsert(item, item.RA))
+      return 'ALUNOS INSERIDOS COM EXITO'
     }else{
       return 'NAO EXISTE ALUNOS NO DIRETORIO PARA INSERIR'
     }
 });
 
-
-ipcMain.handle('insertAluno', async (event, doc: Aluno) => {
-  const result = handleInsert(doc);
-  return result;
-})
-
-ipcMain.handle("getAluno", async () => {
+// Inseri Alunos no formulario.
+ipcMain.handle('insertAluno', async (event, doc: Aluno, key: string) => {
   try {
-    const result = db.allDocs({include_docs: true})
-    return (await result).rows[0].doc
+    const result = handleInsert(doc, key);
+    return `DOCULMENTO INSERIDO COM SUCESSO ${result}`;
   } catch (error) {
-    console.log('ERRO AO BUSCAR', Error )
-    return []
+    return `FALHA AO INSERIR O DOCULMENTO ${Error}`;
   }
+  
 })
 
-ipcMain.handle('updateAluno', async () =>{
+// Seleciona um aluno
+ipcMain.handle("getAluno", async (event, id) => {
+  try {
+    const doc = await db.get(id);
+    return doc;
+  } catch (err) {
+    if(err instanceof Error && 'status' in err && err.status === 404){
+      return false;
+    }else{
+      return false
+    }
+  }
+});
 
+
+// Atualiza um aluno
+ipcMain.handle('updateAluno', async (event, id: string, data: Aluno) =>{
+  db.get(id).then(doc => {
+    doc = {...doc, ...data};
+    return db.put(doc);
+  })
+  .then(response => {
+    return `Documento atualizado com sucesso: ${response}`;
+  })
+  .catch(err => {
+    return `Erro ao atualizar documento: ${err}`;
+  });
 })
 
-// funcoes CRUD
-const handleInsert  = async (doc: Aluno):Promise<PouchDB.Core.Response | void>=>{
-  const id = randomUUID();
+//====================> FUNCOES CRUD <=====================================================================
+const handleInsert  = async (doc: Aluno, key: string):Promise<PouchDB.Core.Response | void>=>{
+  const id = key;
   const data = {...doc, _id: id};
   return db.put(data).then(response => response).catch(err => console.log('ERRO AO CADASTRAR', err));
 }

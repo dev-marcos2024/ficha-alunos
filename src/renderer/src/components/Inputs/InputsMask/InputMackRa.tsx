@@ -12,11 +12,19 @@ interface Props{
 }
 
 export const InputRaMask = ({nome,touched, errors, valor}: Props) => {
-    const {setFieldValue, setFieldTouched} = useFormikContext<TypeForm>();
+    const {setFieldValue, setFieldTouched, setValues} = useFormikContext<TypeForm>();
+    
 
-    const handleSetValue = (val: string) =>{
+    const handleSetValue = async (val: string) =>{
         setFieldValue(nome, val)
         setFieldTouched(nome, true)
+        if (val[12] !== '_') {
+            const data = await window.api.getAluno(val.replaceAll('.', ''))
+            if(data){
+              console.log(data.values)
+              setValues(data.values)
+            }
+        }
     }
 
     return (

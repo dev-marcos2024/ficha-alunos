@@ -1,3 +1,4 @@
+import {TypeForm} from '../renderer/src/models/SchemaForm'
 export type Aluno = {
     RA: string;
     Nome: string;
@@ -31,6 +32,15 @@ export type TableAluno = {
   _id: string;
   _rev?: string;
 } & Aluno
+
+
+type FormType = {
+  _id: string;
+  _rev?: string;
+} & TypeForm
+
+
+export type DocumentType = TableAluno | FormType;
   
 
 
