@@ -1,12 +1,17 @@
 import { contextBridge, ipcRenderer } from 'electron';
 import { electronAPI } from '@electron-toolkit/preload';
+import {TableAluno, Aluno} from '../types/TypeCadastro';
 
 const api = {
   getUF: () => ipcRenderer.invoke('getUF'),
   getCidades: (uf: string) => ipcRenderer.invoke('getCidades', uf),
   getEndereco: (cep: string) => ipcRenderer.invoke('getEndereco', cep),
   uploadFile: (file: any) => ipcRenderer.invoke('uploadFile', file), // Função de upload
-  sendPrintRequest: () => ipcRenderer.send('print-request'), // Função de impressão
+  sendPrintRequest: () => ipcRenderer.send('sendPrintRequest'), // Função de impressão
+  getAluno: ()=> ipcRenderer.invoke('getAluno'),
+  updateAluno: ()=> ipcRenderer.invoke('updateAluno'),
+  insertAluno: (doc: Aluno):Promise<PouchDB.Core.Response | void>=> ipcRenderer.invoke('insertAluno', doc),
+  insertFromListAlunos: () => ipcRenderer.invoke('insertFromListAlunos')
 };
 
 if (process.contextIsolated) {

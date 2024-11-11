@@ -1,7 +1,7 @@
 import React, { Dispatch, useEffect, useState } from 'react'
 import style from './style.module.css';
 import { normalizeString } from "../../utils/ExpRegular";
-import { Field, useField, useFormikContext } from "formik";
+import { ErrorMessage, Field, useField, useFormikContext } from 'formik'
 import { useCidades} from "../../utils/tanstack-query/queries"
 
 interface Props {
@@ -70,6 +70,7 @@ export const SelectSearch = ({ nome,  texto, touched, errors, setTouched, setErr
             onBlur={() => setTimeout(() => setIsOpen(false), 300)}
           />
           <label htmlFor={`id${nome}`}>{texto}</label>
+            <ErrorMessage name={nome} component="div" className="error" />
         </div>
 
         {isOpen && (

@@ -1,18 +1,18 @@
-import { SelectSearch } from "../../components/Selects/SelectSearch"
-import { InputGroup } from "../../components/Inputs/InputGrup";
-import { InputText } from "../../components/Inputs/InputText";
+import { SelectSearch } from "../Selects/SelectSearch"
+import { InputGroup } from "../Inputs/InputGrup";
+import { InputText } from "../Inputs/InputText";
 import { FormikErrors, FormikTouched, useFormikContext } from 'formik'
 import { TypeForm } from '@renderer/src/models/SchemaForm'
-import { InputOption2 } from "../../components/Inputs/InputOption2";
-import { RadioRaca } from "../../components/Radios/RadioRAca";
-import { AlunosSexo } from "../../components/Radios/RadioSexo";
-import { Select } from "../../components/Selects/Select";
+import { InputOption2 } from "../Inputs/InputOption2";
+import { RadioRaca } from "../Radios/RadioRAca";
+import { AlunosSexo } from "../Radios/RadioSexo";
+import { Select } from "../Selects/Select";
 import { useUf } from "../../utils/tanstack-query/queries"
 import { useState } from 'react'
-import { Certidao } from '../../components/Certidao/Index'
-import { InputDate } from '../../components/Inputs/InputDate'
-import { InputRaMask } from "../../components/Inputs/InputsMask/InputMackRa";
-import { InputFile } from '../../components/Inputs/InputFile'
+import { Certidao } from '../Certidao/Index'
+import { InputDate } from '../Inputs/InputDate'
+import { InputRaMask } from "../Inputs/InputsMask/InputMackRa";
+import { InputFile } from '../Inputs/InputFile'
 
 
 interface Props{
@@ -20,9 +20,10 @@ interface Props{
   errors: FormikErrors<TypeForm>,
   setTouched: (field: string, isTouched?: boolean, shouldValidate?: boolean) => void
   setErros: (field: string, message?: string) => void
+  handleFile: (file: File | null) => void
 }
 
-export const DadosAlunos = ({touched, errors, setTouched, setErros}:Props)=>{
+export const DadosAlunos = ({touched, errors, setTouched, setErros, handleFile}:Props)=>{
 
   const {values} = useFormikContext<TypeForm>()
     const [uf1, setUf1] = useState('');
@@ -38,14 +39,15 @@ export const DadosAlunos = ({touched, errors, setTouched, setErros}:Props)=>{
         <div className="flex flex-col gap-6">
           
           <div className="flex gap-6">
-            <div className=''>
+            <div className='max-w-[270px]'>
               <InputRaMask nome='ra' touched={touched.ra} errors={errors.ra} valor={values.ra} />
             </div>
-            <div className=''>
-              <InputGroup id="rm" placeholder="Digite o RM" texto="RM" nome='rm' touched={touched.rm} errors={errors.rm} />
+            <div className='max-w-48'>
+              <InputGroup id="rm" placeholder="_ _ _ _" texto="RM" nome='rm' touched={touched.rm} errors={errors.rm} />
             </div>
             <div className="">
-              <InputFile  nome= 'fotoAluno' touched={touched.fotoAluno} errors={errors.fotoAluno}/>
+              <InputFile  nome= 'fotoAluno' touched={touched.fotoAluno}
+                  errors={errors.fotoAluno} setFile={handleFile}/>
             </div>
           </div>
 
@@ -56,7 +58,7 @@ export const DadosAlunos = ({touched, errors, setTouched, setErros}:Props)=>{
           />
 
           <div className="flex gap-4">
-            <InputOption2 nome="alunosRgCpf" texto1="RG" texto2="Cpf" texto3="RG ou CPF do Aluno" errors={errors}
+            <InputOption2 nome="alunosRgCpf" texto1="RG" texto2="CPF" texto3="RG ou CPF do Aluno" errors={errors}
                           touched={touched} />
             <InputText
               placeholder="Digite o Nis"

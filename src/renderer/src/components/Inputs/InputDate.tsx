@@ -1,4 +1,4 @@
-import { Field } from 'formik'
+import { ErrorMessage, Field } from 'formik'
 
 
 interface Props {
@@ -17,6 +17,7 @@ export const InputDate = ({nome, text, touched, errors}: Props)=>{
              className= {`form-control ${touched && errors ? 'is-invalid' : ''} ${touched && !errors ? 'is-valid' : ''}`}
       />
       <label htmlFor="dataInput">{text}</label>
+      <ErrorMessage name={nome} component="div" className="error" />
     </div>
 
   )

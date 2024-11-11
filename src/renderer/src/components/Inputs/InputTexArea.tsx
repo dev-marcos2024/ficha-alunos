@@ -1,4 +1,4 @@
-import { Field } from "formik"
+import { ErrorMessage, Field } from 'formik'
 
 
 interface Props{
@@ -19,6 +19,7 @@ export const InputTextArea = ({name, texto,touched, errors}: Props)=>{
                 name={name} id={name}
             />
             <label htmlFor={name}>{texto}</label>
+            <ErrorMessage name={name} component="div" className="error" />
         </div>
     )
 }

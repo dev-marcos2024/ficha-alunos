@@ -17,7 +17,7 @@ export const AlunosSexo = ({nome}: Props) => {
                 <Field value= "masculino" type="radio" className="btn-check is-invalid" name={nome} id="sexoRadio2" autoComplete="off"/>
                 <label className="btn btn-outline-primary" htmlFor="sexoRadio2">Masculino</label>
             </div>
-            <ErrorMessage name={nome} component="div" className="text-red-600" />
+            <ErrorMessage name={nome} component="div" className="error" />
         </fieldset>
     );
 };

@@ -1,4 +1,4 @@
-import { Field, Formik, Form, FormikErrors, FormikTouched } from 'formik';
+import { ErrorMessage, Field, FormikErrors, FormikTouched } from 'formik'
 import { TypeForm } from '../../models/SchemaForm';
 
 interface Props {
@@ -29,6 +29,7 @@ export const InputOption2 = ({ texto1, texto2, texto3, nome, touched, errors }: 
                 <label className="btn btn-outline-primary align-content-center" htmlFor={`id${nome}2`} >
                     {texto2}
                 </label>
+                <ErrorMessage name={nome} component="div" className="error" />
             </div>
 
             <div className="form-floating p-0">
@@ -39,6 +40,7 @@ export const InputOption2 = ({ texto1, texto2, texto3, nome, touched, errors }: 
                 <label htmlFor={`id${nome}Input`} className="ms-3">
                     {texto3}
                 </label>
+                <ErrorMessage name={nome} component="div" className="error" />
             </div>
         </div>
     );

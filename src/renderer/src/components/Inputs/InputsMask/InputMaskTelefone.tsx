@@ -1,4 +1,4 @@
-import { useFormikContext } from "formik";
+import { ErrorMessage, useFormikContext } from 'formik'
 import { InputMask} from "primereact/inputmask";
 import { TypeForm } from "../../../models/SchemaForm";
 
@@ -32,6 +32,7 @@ export const InputTelefoneMask = ({nome,touched, errors, valor}: Props) => {
                 mask="(99) 99999-9999" placeholder="(99) 99999-9999"
             />
             <label htmlFor={nome}>Digite o Telefone</label>
+            <ErrorMessage name={nome} component="div" className="error" />
         </div>       
     )
 }

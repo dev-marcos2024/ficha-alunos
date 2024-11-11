@@ -39,7 +39,7 @@ export const Select = ({name, touched, errors, valueDisabled, optionList, setSel
                 <option key={index} value={item}>{item}</option>
               ))}
             </Field>
-            <ErrorMessage name="state" component="div" id={`${name}Feedback`} className="invalid-feedback" />
+            <ErrorMessage name={name} component="div" className="error" />
           </div>
     )
 } 

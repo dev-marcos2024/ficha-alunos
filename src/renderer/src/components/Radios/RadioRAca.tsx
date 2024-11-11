@@ -29,7 +29,7 @@ export const RadioRaca = ({nome}: Props) => {
                 <Field value= "nao declarada" type="radio" className="btn-check" name={nome} id="racaRadio6" autoComplete="off"/>
                 <label className="btn btn-outline-primary is-invalid" htmlFor="racaRadio6">NAO DECLARADA</label>
             </div>
-            <ErrorMessage name={nome} component="div" className="text-red-600" />
+            <ErrorMessage name={nome} component="div" className="error" />
         </fieldset>
     );
 };

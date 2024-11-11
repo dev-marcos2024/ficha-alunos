@@ -1,30 +1,22 @@
-import { useFormikContext } from 'formik';
-import { useState } from 'react';
+import { ErrorMessage, Field, useFormikContext } from 'formik'
+import {TypeForm}    from '../../models/SchemaForm'
 
-interface FormValues {
-  [key: string]: any;
-}
+
 
 interface Props {
   nome: string;
   touched: boolean | undefined;
   errors: string | undefined;
+  setFile: (file: File | null)=> void;
 }
 
-export const InputFile = ({ nome, touched, errors }: Props) => {
+export const InputFile = ({ nome, touched, errors, setFile }: Props) => {
 
-  const { setFieldValue, setFieldTouched } = useFormikContext<FormValues>();
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const { setFieldTouched, values } = useFormikContext<TypeForm>();
 
-    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files ? e.target.files[0] : null;
-
-    if (file) {
-      // Envia o arquivo para o backend do Electron
-      const resp = await window.api.uploadFile({ path: file.path, name: file.name });
-      if(resp.fileUrl) setImageUrl(resp.fileUrl)
-      console.log(resp.fileUrl)
-    }
+    if (file) setFile(file);
   };
 
   return (
@@ -37,6 +29,7 @@ export const InputFile = ({ nome, touched, errors }: Props) => {
         onChange={handleFileChange}
         className={`form-control form-control-lg ${touched && errors ? 'is-invalid' : ''} ${touched && !errors ? 'is-valid' : ''}`}
       />
+      <ErrorMessage name={nome} component="div" className="error" />
     </div>
   );
 };

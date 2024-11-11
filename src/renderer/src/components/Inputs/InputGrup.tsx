@@ -1,4 +1,4 @@
-import { Field } from 'formik'
+import { ErrorMessage, Field } from 'formik'
 
 
 interface Props{
@@ -15,7 +15,7 @@ export const InputGroup = ({ id, texto, placeholder, nome,  touched, errors  }: 
 
     return (
       <div className="input-group input-group-lg">
-        <span className="input-group-text text-gray-600" id={id}>
+        <span className="input-group-text" id={id}>
           {texto}
         </span>
         <Field
@@ -27,6 +27,7 @@ export const InputGroup = ({ id, texto, placeholder, nome,  touched, errors  }: 
           name={nome}
           className={`form-control ${touched && errors ? 'is-invalid' : ''} ${touched && !errors ? 'is-valid' : ''}`}
         />
+          <ErrorMessage name={nome} component="div" className="error" />
       </div>
     )
 }

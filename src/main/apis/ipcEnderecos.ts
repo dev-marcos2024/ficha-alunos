@@ -1,7 +1,7 @@
 import {ipcMain} from 'electron'
 import axios from 'axios'
-import {Estado} from '../types/TypeUf'
-import { Municipio } from '../types/TypeMunicipio'
+import {Estado} from '../../types/TypeUf'
+import { Municipio } from '../../types/TypeMunicipio'
 
 const req = axios.create({
   baseURL: 'https://servicodados.ibge.gov.br/api/v1/localidades',

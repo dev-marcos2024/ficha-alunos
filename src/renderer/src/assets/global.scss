@@ -1,0 +1,110 @@
+//============> Definição das variáveis
+$input-btn-focus-blur: 6px;
+$input-btn-focus-width: 6px;
+$input-btn-focus-color: #6bd1ff;
+$border-width: 1px; // Define a largura de borda padrão
+$component-active-bg: #167bf7; // azul, como exemplo
+$input-btn-focus-color-opacity: 0.8; // 50% de opacidade
+$font-size-lg: 1.25rem; // Tamanho de fonte grande padrão
+$border-color: #1276fc;
+$input-color: #363636;
+$color-white: #FFF;
+
+// Definindo os objetos com suas variaveis
+$input-btn-focus-box-shadow: 0 0 $input-btn-focus-blur $input-btn-focus-width $input-btn-focus-color;
+$input-btn-font-size-lg: $font-size-lg;
+$input-btn-border-width: $border-width;
+$input-group-addon-bg: $border-color;
+$input-group-addon-color: $color-white;
+
+// Importe o Bootstrap SASS e depois o Tailwind
+@import "bootstrap/scss/bootstrap";
+
+// Imports do Tailwind
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// Variáveis CSS para personalizar o tema
+   :root {
+       --fundo: #031734;
+       --bg-primary: #ccccb3;
+       --color-primary: #CCC;
+       --botoes: #19376D;
+       --borda-destaque: #167bf7;
+       --text1: #00c86f;
+       --text2: #9cd33b;
+       --text3: #f16165;
+       --text4: #7b71ff;
+       --color-hover: #ff8c2a;
+       $color-white: #FFF;
+   }
+
+// Estilos adicionais
+   body {
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       background-color: var(--fundo) !important;
+       color: var(--text) !important;
+       user-select: none;
+   }
+legend{
+    color: var(--text3) !important;
+}
+
+.fieldset {
+    border-radius: 1rem;
+    background-color: rgba(9, 51, 102, 0.4);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    background-image: url('./luz-form.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: 1px solid #167bf7;
+}
+
+.btn:hover {
+    background-color: var(--text3) !important;
+    color: var(--text2) !important;
+}
+
+.error{
+    position: relative;
+    color: red;
+    display: block;
+    align-items: start;
+    margin-top: 8px;
+    width: fit-content;
+    padding-right: 1.5rem;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.error::after {
+    content: '!'; /* Adiciona o sinal de exclamação */
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%); /* Centraliza verticalmente */
+    width: 18px;
+    height: 18px;
+    border: 1px solid red;
+    border-radius: 50%;
+    color: red;
+    font-weight: bold;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input, select, label, textarea {
+    max-height: 58px !important;
+}
+
+
+
+
+

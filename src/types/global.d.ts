@@ -9,6 +9,11 @@ declare global {
       getEndereco: (cep:string) => Promise<any>,
       uploadFile: (file: CustomFile) => Promise<any>,
       sendPrintRequest: () => Promise<any>,
+      getHistoricoCadastro: () => Promise<any>,
+      getAluno: ()=> Promise<any>,
+      updateAluno: ()=> Promise<any>,
+      insertAluno: (doc: Aluno)=>Promise<PouchDB.Core.Response | void>,
+      insertFromListAlunos: () => Promise<any>
     };
     customApi: {
       sendPrintRequest: () => void;
@@ -16,7 +21,7 @@ declare global {
   }
 }
 
-interface CustomFile {
+export  interface CustomFile {
   path: string;
   name: string;
 }

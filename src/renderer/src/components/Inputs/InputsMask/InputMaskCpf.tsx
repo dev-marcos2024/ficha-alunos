@@ -1,4 +1,4 @@
-import { useFormikContext } from "formik";
+import { ErrorMessage, useFormikContext } from 'formik'
 import { InputMask} from "primereact/inputmask";
 import { TypeForm } from "../../../models/SchemaForm";
 
@@ -32,6 +32,7 @@ export const InputCpfMask = ({nome,touched, errors, valor}: Props) => {
                 mask="999.999.999-99" placeholder="999.999.999-99"
             />
             <label htmlFor={nome}>Digite o CPF</label>
+            <ErrorMessage name={nome} component="div" className="error" />
         </div>       
     )
 }

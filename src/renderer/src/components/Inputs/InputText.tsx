@@ -1,4 +1,4 @@
-import { Field } from 'formik'
+import { ErrorMessage, Field } from 'formik'
 import { ReactNode } from 'react'
 
 
@@ -17,14 +17,15 @@ export const InputText = ({texto, placeholder, nome,  touched, errors, tipo }: P
 
     return (
         <div className="form-floating">
-        <Field
-            type={tipo}
-            id={nome}
-            placeholder={placeholder}
-            name={nome}
-            className={`form-control ${touched && errors ? 'is-invalid' : ''} ${touched && !errors ? 'is-valid' : ''} `}
-        />
+            <Field
+                type={tipo}
+                id={nome}
+                placeholder={placeholder}
+                name={nome}
+                className={`form-control ${touched && errors ? 'is-invalid' : ''} ${touched && !errors ? 'is-valid' : ''} `}
+            />
             <label htmlFor={nome}>{texto}</label>
+            <ErrorMessage name={nome} component="div" className="error" />
         </div>
     )
 }

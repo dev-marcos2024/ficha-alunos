@@ -6,10 +6,9 @@ import { useState } from 'react'
 export const Actions = ()=>{
   const [display, setDisplay] = useState<boolean>(false);
 
-  function handlePrint() {
+ async function handlePrint() {
     setDisplay(true);
-    // @ts-ignore
-    window.api.sendPrintRequest();
+    await window.api.sendPrintRequest();
     setTimeout(() => setDisplay(false), 1000);
   }
 

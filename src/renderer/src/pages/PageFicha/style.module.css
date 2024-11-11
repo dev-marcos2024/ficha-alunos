@@ -231,9 +231,9 @@ img{
     grid-template-rows: 1fr 1fr;
 }
 .l7Item2 div:first-child{
-    display: grid;
-    grid-template-columns: auto 1.3fr auto 2fr auto 0;
-    padding: 0 4rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
 }
 .l7Item2 div:last-child{
     text-align: center;
@@ -243,8 +243,15 @@ img{
     grid-template-columns: 1fr 1.5fr;
 }
 .l7Item3 div:last-child{
-    display: grid;
-    grid-template-columns: auto .8fr auto 2fr auto 1fr;
+    display: flex;
+    justify-content: end;
+    gap: .5rem;
+    padding-right: 4rem;
+    margin-bottom: .3rem;
+}
+.l7Item3 div:last-child span{
+    padding-left: 0;
+    text-transform: lowercase;
 }
 /*===============>>>>> Linha 8*/
 table {

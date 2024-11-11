@@ -7,12 +7,11 @@ import { useLocation } from 'react-router-dom'
 
 export const Header = () =>{
   const data: TypeForm = useLocation().state;
-
   
   return (
     <header className={styles.header}>
       <div className={`${styles.foto}`}>
-        <img className='h-full' src={`local-file://uploads/${data && data.rm}.jpg`} alt="Foto do aluno" />
+        <img className='h-full' src={`local-file://uploads/${data && data.fileName}`} alt="Foto do aluno" />
       </div>
       <div>
         <img src={logo} alt="Logo Prefeitura" />

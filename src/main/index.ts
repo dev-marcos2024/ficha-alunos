@@ -2,8 +2,7 @@ import { app, shell, BrowserWindow, ipcMain, protocol } from 'electron';
 import path, { join } from 'node:path';
 import { electronApp, optimizer, is } from '@electron-toolkit/utils';
 import { createFileRoute, createURLRoute } from 'electron-router-dom';
-import './ipcEnderecos';
-import './ipcSaveFile';
+import  './apis/ipc'
 
 function createWindow() {
   // Cria a janela principal do aplicativo.
@@ -68,8 +67,6 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window);
   });
 
-  // Teste de IPC
-  ipcMain.on('ping', () => console.log('pong'));
 
   // Cria a janela principal
   createWindow();

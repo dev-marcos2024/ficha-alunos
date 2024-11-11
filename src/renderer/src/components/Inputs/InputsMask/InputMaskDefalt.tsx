@@ -1,4 +1,4 @@
-import { useFormikContext } from "formik";
+import { ErrorMessage, useFormikContext } from 'formik'
 import { InputMask} from "primereact/inputmask";
 import { TypeForm } from "../../../models/SchemaForm";
 
@@ -35,6 +35,7 @@ export const InputMaskDefalt = ({nome,touched, errors, valor, pHolder, Texto, ma
                 mask={mask} placeholder={pHolder}
             />
             <label htmlFor={nome}>{Texto}</label>
+            <ErrorMessage name={nome} component="div" className="error" />
         </div>       
     )
 }
