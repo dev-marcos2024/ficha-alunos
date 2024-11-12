@@ -13,7 +13,8 @@ declare global {
       getAluno: (id: strin)=> Promise<any>,
       updateAluno: (id: string, data: Aluno)=> Promise<any>,
       insertAluno: (doc: Aluno, key: string)=>Promise<PouchDB.Core.Response | void>,
-      insertFromListAlunos: () => Promise<any>
+      insertFromListAlunos: () => Promise<any>,
+      selectAll: (table: string) => Promise<any>,
     };
     customApi: {
       sendPrintRequest: () => void;

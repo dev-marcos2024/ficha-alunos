@@ -3,6 +3,7 @@ import path, { join } from 'node:path';
 import { electronApp, optimizer, is } from '@electron-toolkit/utils';
 import { createFileRoute, createURLRoute } from 'electron-router-dom';
 import  './apis/ipc'
+import './apis/ipcSqlite'
 
 function createWindow() {
   // Cria a janela principal do aplicativo.

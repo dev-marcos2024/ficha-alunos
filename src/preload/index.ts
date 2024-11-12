@@ -1,6 +1,7 @@
 import { contextBridge, ipcRenderer } from 'electron';
 import { electronAPI } from '@electron-toolkit/preload';
 import { Aluno} from '../types/TypeCadastro';
+import {TabelaRm} from '~/src/types/TypeSqlite'
 
 const api = {
   getUF: () => ipcRenderer.invoke('getUF'),
@@ -11,7 +12,8 @@ const api = {
   getAluno: (id: string)=> ipcRenderer.invoke('getAluno', id),
   updateAluno: (id: string, data: Aluno)=> ipcRenderer.invoke('updateAluno', id, data),
   insertAluno: (doc: Aluno, key: string):Promise<PouchDB.Core.Response | void> => ipcRenderer.invoke('insertAluno', doc, key),
-  insertFromListAlunos: () => ipcRenderer.invoke('insertFromListAlunos')
+  insertFromListAlunos: () => ipcRenderer.invoke('insertFromListAlunos'),
+  selectAll: (table: string): Promise<TabelaRm[]> => ipcRenderer.invoke('selectAll', table),
 };
 
 if (process.contextIsolated) {
