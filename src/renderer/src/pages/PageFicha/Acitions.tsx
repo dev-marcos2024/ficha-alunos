@@ -14,8 +14,8 @@ export const Actions = ()=>{
 
     return(
         <div className={`${styles.actions} ${display && "d-none"}`}>
-          <Link className="btn btn-outline-danger" to='/'>Editar</Link>
-          <button onClick={handlePrint} type="button" className="btn btn-outline-danger">Imprimir</button>
+          <Link className="btn btn-outline-danger bg-slate-900 hover:border-slate-900 " to='/'>Editar</Link>
+          <button onClick={handlePrint} type="button" className="btn btn-outline-danger bg-slate-900 hover:border-slate-900 ">Imprimir</button>
         </div>
     )
 }

@@ -320,7 +320,7 @@ td{
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(0, 0, 0, 0.5);
     gap: 2rem;
     font-weight: bold;
     display: none;

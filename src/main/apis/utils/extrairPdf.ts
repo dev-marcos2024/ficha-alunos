@@ -17,7 +17,12 @@ interface Dados {
   [key: string]: string;
 }
 
-export const caminho = path.join(app.getPath('downloads'),'..','OneDrive - Prefeitura Municipal de Itupeva', 'ARQUIVOS');
+export const caminho = path.join(app.getPath('documents'),'ARQUIVOS');
+
+// Criando diretório caso nao exista.
+if (!fs.existsSync(caminho)) {
+  fs.mkdirSync(caminho, { recursive: true });
+}
 const listArquivos = fs.readdirSync(caminho);
 
   

@@ -20,10 +20,11 @@ export const InputRaMask = ({nome,touched, errors, valor}: Props) => {
         setFieldTouched(nome, true)
         if (val[12] !== '_') {
             const data = await window.api.getAluno(val.replaceAll('.', ''))
-            if(data){
-              console.log(data.values)
-              setValues(data.values)
-            }
+            // if(data){
+            //   console.log(data.values)
+            //   setValues(data.values)
+            // }
+            console.log(data)
         }
     }
 

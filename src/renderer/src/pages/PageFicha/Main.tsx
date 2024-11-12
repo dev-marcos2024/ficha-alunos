@@ -85,12 +85,12 @@ export const Main = ()=>{
           </div>
           <div className={styles.l}></div>
           <div>
-            BRANCA <span id="raca-branca">({data && data.alunoRaca === 'branca' && 'X'})</span>
-            PRETA <span id="raca-preta">({data && data.alunoRaca === 'preta' && 'X'})</span>
-            PARDA <span id="raca-parda">({data && data.alunoRaca === 'parda' && 'X'})</span>
-            AMARELA <span id="raca-amarela">({data && data.alunoRaca === 'amarela' && 'X'})</span>
+            BRANCA<span id="raca-branca">({data && data.alunoRaca === 'branca' && 'X'}) </span>
+            PRETA<span id="raca-preta">({data && data.alunoRaca === 'preta' && 'X'}) </span>
+            PARDA<span id="raca-parda">({data && data.alunoRaca === 'parda' && 'X'}) </span>
+            AMARELA<span id="raca-amarela">({data && data.alunoRaca === 'amarela' && 'X'}) </span>
             INDÍGENA{' '}
-            <span id="raca-indigina">({data && data.alunoRaca === 'indigina' && 'X'})</span>
+            <span id="raca-indigina">({data && data.alunoRaca === 'indigina' && 'X'}) </span>
             NÃO DECLARADA{' '}
             <span id="raca-nao-declarada">
               ({data && data.alunoRaca === 'nao declarada' && 'X'})
@@ -128,11 +128,13 @@ export const Main = ()=>{
               <span id="certidao-numero">{data && data.certidaoNumero}</span>
             </div>
           :
-            <div className={`${styles.cel} ${styles.l4Item6}`}>
+            <div className={`${styles.cel} ${styles.l4Item6} flex gap-3`}>
               <strong>CERTIDÃO NOVA (MATRICULA)</strong>
               <span id="certidao-nova">{data && data.certidaoNova}</span>
+              <strong>DATA EMISSÃO</strong>
+              <span id='dataEmissao'>{ data &&  data.emisCert }</span>
             </div>
-        }
+          }
         </div>
 
         <div className={`${styles.linha} ${styles.linha5}`}>

@@ -22,7 +22,7 @@ export const AlunoSchema = Yup.object().shape({
   estadoCicil: Yup.string().required('É obrigatório selecionar o Estado Civil do aluno.'),
   alunoNacionalidade: Yup.string().required('A nacionalidade é obrigatória.'),
   DataNascimentoAluno: Yup.date().required("Data de nascimento é obrigatória"),
-
+  emisCert: Yup.date(),
   // Informações de nascimento e certidão
   UfNascimento: Yup.string().length(2, 'UF deve ter 2 caracteres.').required('Campo obrigatório.'),
   municipioNascimento: Yup.string().required(),
@@ -114,6 +114,7 @@ export const InitialDateForm = {
   certidaoNumero: '',
   OpcaoCertidao: 'Nova',
   DataNascimentoAluno: '',
+  emisCert: '',
 
   cpfPai: '',
   rgPai: '',
