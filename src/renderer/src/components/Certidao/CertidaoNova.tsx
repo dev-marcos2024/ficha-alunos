@@ -11,7 +11,7 @@ export const CertidaoNova = () => {
     <>
       <InputMaskDefalt
         nome="certidaoNova"
-        Texto='"Certidão Nova (Matrícula)"'
+        Texto='Certidão Nova (Matrícula)'
         mask='999999.99.99.9999.9.99999.999.9999999.99'
         pHolder="999999.99.99.9999.9.99999.999.9999999.99"
         valor= {values.certidaoNova}

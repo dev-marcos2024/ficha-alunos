@@ -2,9 +2,9 @@ import { app, ipcMain } from 'electron'
 import PouchDB from 'pouchdb'
 import path from 'node:path'
 import fs from 'node:fs'
-import {TableAluno, Aluno} from '../../types/TypeCadastro';
+import {TableAluno, Aluno} from '~/src/types/TypeCadastro';
 import {listDataAlunos} from './utils/extrairPdf'
-import {TypeForm} from '../../renderer/src/models/SchemaForm'
+import {TypeForm} from '~/src/renderer/src/models/SchemaForm'
 
 // Diretorio da base de dados Histórico de matricula.
 const dbDir = path.join(app.getPath('userData'), 'databases');
@@ -44,8 +44,7 @@ ipcMain.handle('insertAluno', async (event, doc: Aluno, key: string) => {
 // Seleciona um aluno
 ipcMain.handle("getAluno", async (event, id) => {
   try {
-    const doc = await db.get(id);
-    return doc;
+    return await db.get(id);
   } catch (err) {
     if(err instanceof Error && 'status' in err && err.status === 404){
       return false;
@@ -72,7 +71,18 @@ ipcMain.handle('updateAluno', async (event, id: string, data: Aluno) =>{
 
 //====================> FUNCOES CRUD <=====================================================================
 const handleInsert  = async (doc: Aluno, key: string):Promise<PouchDB.Core.Response | void>=>{
-  const id = key;
-  const data = {...doc, _id: id};
+  const data = {...doc, _id: key};
   return db.put(data).then(response => response).catch(err => console.log('ERRO AO CADASTRAR', err));
 }
+
+const handleAllDocs = async () => {
+  try {
+    const result = await db.allDocs({ include_docs: true });
+    // O array de documentos estará em result.rows
+    return result.rows.map(row => row.doc);
+  } catch (error) {
+    return `Erro ao buscar documentos: ${error}`;
+  }
+}
+
+
