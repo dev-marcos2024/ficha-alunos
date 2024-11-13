@@ -1,3 +1,5 @@
+import {typeNewRm} from './TypesSqlite'
+
 export {};
 
 declare global {
@@ -15,6 +17,7 @@ declare global {
       insertAluno: (doc: Aluno, key: string)=>Promise<PouchDB.Core.Response | void>,
       insertFromListAlunos: () => Promise<any>,
       selectAll: (table: string) => Promise<any>,
+      newRm: () => Promise<typeNewRm[]>
     };
     customApi: {
       sendPrintRequest: () => void;

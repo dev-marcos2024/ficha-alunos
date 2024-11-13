@@ -14,6 +14,7 @@ const api = {
   insertAluno: (doc: Aluno, key: string):Promise<PouchDB.Core.Response | void> => ipcRenderer.invoke('insertAluno', doc, key),
   insertFromListAlunos: () => ipcRenderer.invoke('insertFromListAlunos'),
   selectAll: (table: string): Promise<TabelaRm[]> => ipcRenderer.invoke('selectAll', table),
+  newRm: () => ipcRenderer.invoke('newRm'),
 };
 
 if (process.contextIsolated) {

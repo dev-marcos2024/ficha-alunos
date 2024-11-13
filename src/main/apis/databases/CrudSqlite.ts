@@ -3,8 +3,12 @@ import sqlite3 from 'sqlite3'
 import path from 'node:path'
 import {TabelaRm} from '~/src/types/TypeSqlite'
 
-
-const dbDir = path.join(app.getPath('downloads'), '..','OneDrive - Prefeitura Municipal de Itupeva', 'Aplicacao', 'BD_laerte.db' );
+let dbDir = ''
+try {
+  dbDir = path.join(app.getPath('downloads'), '..','OneDrive - Prefeitura Municipal de Itupeva', 'Aplicacao', 'BD_laerte.db' );
+} catch (error) {
+  dbDir = path.join(app.getPath('documents'), 'BD_laerte.db' );
+}
 
 
 // Conectando ao banco de dados SQLite
@@ -27,4 +31,18 @@ export function selectAll(table: string): Promise<TabelaRm[]> {
         }
       });
     });
+}
+
+// CRIANDO NOVO RM
+export function selectNewRm(){
+  return new Promise((resolve, reject)=> {
+    db.all(`SELECT * FROM NewRm`,(err, rows) => {
+      if (err) {
+        console.error('Erro ao executar consulta:', err.message);
+        reject(err.message);
+      } else {
+        resolve(rows);
+      }
+    });
+  });
 }

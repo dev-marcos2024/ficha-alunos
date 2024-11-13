@@ -4,8 +4,8 @@
 export const Teste = ()=>{
 
   async  function handleTeste(){
-        const data = await window.api.selectAll('rm_alunos');
-        console.log(data)
+        const data = await window.api.newRm();
+        console.log(data[0].newRm)
     }
 
 
