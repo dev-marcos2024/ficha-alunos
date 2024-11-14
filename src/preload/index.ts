@@ -2,19 +2,23 @@ import { contextBridge, ipcRenderer } from 'electron';
 import { electronAPI } from '@electron-toolkit/preload';
 import { Aluno} from '../types/TypeCadastro';
 import {TabelaRm} from '~/src/types/TypeSqlite'
+import { TypeRm, TypeNewCadastro } from '../types/TypesSqlite';
 
 const api = {
-  getUF: () => ipcRenderer.invoke('getUF'),
-  getCidades: (uf: string) => ipcRenderer.invoke('getCidades', uf),
-  getEndereco: (cep: string) => ipcRenderer.invoke('getEndereco', cep),
-  uploadFile: (file: any) => ipcRenderer.invoke('uploadFile', file), // Função de upload
-  sendPrintRequest: () => ipcRenderer.send('sendPrintRequest'), // Função de impressão
-  getAluno: (id: string)=> ipcRenderer.invoke('getAluno', id),
-  updateAluno: (id: string, data: Aluno)=> ipcRenderer.invoke('updateAluno', id, data),
+  getUF: (): Promise<string[]> => ipcRenderer.invoke('getUF'),
+  getCidades: (uf: string):Promise<any> => ipcRenderer.invoke('getCidades', uf),
+  getEndereco: (cep: string):Promise<any> => ipcRenderer.invoke('getEndereco', cep),
+  uploadFile: (file: any): Promise<any> => ipcRenderer.invoke('uploadFile', file), 
+  sendPrintRequest: () => ipcRenderer.send('sendPrintRequest'), 
+  getAluno: (id: string): Promise<any>=> ipcRenderer.invoke('getAluno', id),
+  updateAluno: (id: string, data: Aluno): Promise<any>=> ipcRenderer.invoke('updateAluno', id, data),
   insertAluno: (doc: Aluno, key: string):Promise<PouchDB.Core.Response | void> => ipcRenderer.invoke('insertAluno', doc, key),
-  insertFromListAlunos: () => ipcRenderer.invoke('insertFromListAlunos'),
+  insertFromListAlunos: ():Promise<any> => ipcRenderer.invoke('insertFromListAlunos'),
   selectAll: (table: string): Promise<TabelaRm[]> => ipcRenderer.invoke('selectAll', table),
-  newRm: () => ipcRenderer.invoke('newRm'),
+  getNewRm: (): Promise<number> => ipcRenderer.invoke('getNewRm'),
+  selectByRa: (ra: string): Promise<TypeRm[]> => ipcRenderer.invoke('selectByRa', ra),
+  criarNovoRm: (obj: TypeNewCadastro): Promise<string> => ipcRenderer.invoke('criarNovoRm', obj),
+
 };
 
 if (process.contextIsolated) {
@@ -32,3 +36,6 @@ if (process.contextIsolated) {
   // @ts-ignore (define in dts)
   window.api = api;
 }
+
+
+export type ApiType = typeof api

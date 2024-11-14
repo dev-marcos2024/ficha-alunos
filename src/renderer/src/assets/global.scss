@@ -2,7 +2,7 @@
 $input-btn-focus-blur: 6px;
 $input-btn-focus-width: 6px;
 $input-btn-focus-color: #6bd1ff;
-$border-width: 1px; // Define a largura de borda padrão
+$border-width: 2px; // Define a largura de borda padrão
 $component-active-bg: #167bf7; // azul, como exemplo
 $input-btn-focus-color-opacity: 0.8; // 50% de opacidade
 $font-size-lg: 1.25rem; // Tamanho de fonte grande padrão
@@ -33,11 +33,11 @@ $input-group-addon-color: $color-white;
        --botoes: #19376D;
        --borda-destaque: #167bf7;
        --text1: #00c86f;
-       --text2: #9cd33b;
+       --text2: #020617;
        --text3: #f16165;
        --text4: #7b71ff;
        --color-hover: #ff8c2a;
-       $color-white: #FFF;
+       --color-white: #FFF;
    }
 
 // Estilos adicionais
@@ -50,7 +50,9 @@ $input-group-addon-color: $color-white;
        user-select: none;
    }
 legend{
-    color: var(--text3) !important;
+    color: #bbbbbb !important;
+    font-weight: 700;
+    font-size: 2rem;
 }
 
 .fieldset {
@@ -103,7 +105,11 @@ legend{
 input, select, label, textarea {
     max-height: 58px !important;
 }
-
+input{
+    font-weight: bold !important;
+    color: #252525 !important;
+    text-transform: uppercase;
+}
 
 
 

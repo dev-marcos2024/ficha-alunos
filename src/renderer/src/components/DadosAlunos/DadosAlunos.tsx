@@ -34,7 +34,7 @@ export const DadosAlunos = ({touched, errors, setTouched, setErros, handleFile}:
 
     return (
       <fieldset className={`fieldset`}>
-        <legend className='text-gray-400'>Dados do Aluno</legend>
+        <legend className='text-gray-400 mb-4'>Dados do Aluno</legend>
 
         <div className="flex flex-col gap-6">
           
@@ -43,7 +43,7 @@ export const DadosAlunos = ({touched, errors, setTouched, setErros, handleFile}:
               <InputRaMask nome='ra' touched={touched.ra} errors={errors.ra} valor={values.ra} />
             </div>
             <div className='max-w-48'>
-              <InputGroup id="rm" placeholder="_ _ _ _" texto="RM" nome='rm' touched={touched.rm} errors={errors.rm} />
+              <InputGroup id="rm" placeholder="" texto="RM" nome='rm' touched={touched.rm} errors={errors.rm} disabled= {true }/>
             </div>
             <div className="">
               <InputFile  nome= 'fotoAluno' touched={touched.fotoAluno}

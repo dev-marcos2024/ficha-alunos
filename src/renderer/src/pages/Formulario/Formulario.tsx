@@ -47,8 +47,9 @@ export const Formulario = () => {
           </div>
     
           <div className="flex p-10 items-center justify-center">
-            <button type="submit" className="btn btn-primary w-full p-3">
-              Enviar
+            <button type="submit" className="btn btn-primary p-3 font-bold text-xl w-48">
+              <i className="bi bi-floppy2-fill mr-2"></i>
+              Salvar
             </button>
             <Link className="btn btn-outline-danger" to="/ficha">
               Ficha

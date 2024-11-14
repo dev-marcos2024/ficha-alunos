@@ -20,9 +20,7 @@ export  const Certidao = ()=>{
         : 
           <CertidaoAntiga />
       }
-      <div className="w-auto">
-        <InputDate nome='emisCert' text='Data Emissão' errors={errors.emisCert} touched = {touched.emisCert} />
-      </div>
+      <InputDate nome='emsCertidao' text='Data de Emissão' errors={errors.emsCertidao} touched={touched.emsCertidao} />
     </div>
   )
 }

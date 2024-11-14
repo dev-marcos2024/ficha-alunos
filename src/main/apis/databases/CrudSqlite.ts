@@ -1,28 +1,11 @@
-import { app} from 'electron'
-import sqlite3 from 'sqlite3'
-import path from 'node:path'
+import { TypeNewRm, TypeRm, TypeNewCadastro } from '~/src/types/TypesSqlite';
+import {db} from './conectDatabase'
 import {TabelaRm} from '~/src/types/TypeSqlite'
-
-let dbDir = ''
-try {
-  dbDir = path.join(app.getPath('downloads'), '..','OneDrive - Prefeitura Municipal de Itupeva', 'Aplicacao', 'BD_laerte.db' );
-} catch (error) {
-  dbDir = path.join(app.getPath('documents'), 'BD_laerte.db' );
-}
-
-
-// Conectando ao banco de dados SQLite
-const db = new sqlite3.Database(dbDir, (err) => {
-    if (err) {
-      return console.error('Erro ao conectar ao banco de dados:', err.message);
-    }
-    console.log('Conectado ao banco de dados SQLite.');
-  });
 
 // SELECIONANDO TODAS A TABELA
 export function selectAll(table: string): Promise<TabelaRm[]> {
     return new Promise((resolve, reject)=> {
-      db.all(`SELECT * FROM ${table}`, [], (err, rows: TabelaRm[]) => {
+      db && db.all(`SELECT * FROM ${table}`, [], (err, rows: TabelaRm[]) => {
         if (err) {
           console.error('Erro ao executar consulta:', err.message);
           reject(err.message);
@@ -33,16 +16,56 @@ export function selectAll(table: string): Promise<TabelaRm[]> {
     });
 }
 
-// CRIANDO NOVO RM
-export function selectNewRm(){
-  return new Promise((resolve, reject)=> {
-    db.all(`SELECT * FROM NewRm`,(err, rows) => {
+// SELECIONANDO NOVO RM
+export function getNewRm(): Promise<number> {
+  return new Promise((resolve, reject) => {
+    if (!db) return reject("Database connection is not available");
+
+    db.all(`SELECT * FROM NewRm`, (err, rows:TypeNewRm[]) => {
       if (err) {
-        console.error('Erro ao executar consulta:', err.message);
+        console.error("Erro ao executar consulta:", err.message);
+        reject(err.message);
+      } else {
+        resolve(rows[0].newRm);
+      }
+    });
+  });
+}
+
+// SELECIONA UM REGISTRO DA TABELA RM
+export function getByRa(ra: string): Promise<TabelaRm[]> {
+  return new Promise((resolve, reject) => {
+    if (!db) return reject("Database connection is not available");
+
+    db.all(`SELECT * FROM rm_alunos WHERE ra = ${ra}`, (err, rows:TabelaRm[]) => {
+      if (err) {
+        console.error("Erro ao executar consulta:", err.message);
         reject(err.message);
       } else {
         resolve(rows);
       }
     });
   });
+
 }
+
+// CADASTRA UM NOVO RM
+export function insertIntoRm(obj: TypeNewCadastro): Promise<string> {
+  return new Promise((resolve, reject) => {
+    if (!db) return reject("Database connection is not available");
+
+    const query = `INSERT INTO rm_alunos (nome, ra,  dig) VALUES (?, ?, ?)`;
+
+    db.run(query, [obj.nome, obj.ra, obj.dig], function (err) {
+      if (err) {
+        console.error("Erro ao inserir registro:", err.message);
+        reject("Erro ao inserir registro: " + err.message);
+      } else if (this.changes > 0) {
+        resolve("Registro inserido com sucesso");
+      } else {
+        reject("Nenhum registro foi inserido");
+      }
+    });
+  });
+}
+

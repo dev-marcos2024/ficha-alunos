@@ -5,13 +5,13 @@ const rgRegexCertidao = /^\d{6}\.\d{2}\.\d{2}\.\d{4}\.\d{1}\.\d{5}\.\d{3}\.\d{7}
 const rgRegexCpf = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
 const rgRegexTelefone = /^\(\d{2}\) \d{4}-\d{4}$/;
 const rgRegexCelular = /^\(\d{2}\) \d{5}-\d{4}$/;
-const rgRegexRa = /^\d{3}\.\d{3}\.\d{3}-[0-9X]$/;
+const rgRegexRa = /^\d{3}\.\d{3}\.\d{3}.+/;
 const rgRegexCep = /^\d{5}-\d{3}$/;
 
 // Esquema de validação Yup
 export const AlunoSchema = Yup.object().shape({
   // Informações básicas do aluno
-  rm: Yup.number().required('O campo RM é obrigatório.'),
+  rm: Yup.number().required(),
   ra: Yup.string()
     .matches(rgRegexRa, 'O RA deve estar no formato 999.999.999-9 ou 999.999.999-X')
     .required('O RA é obrigatório'),
@@ -38,6 +38,7 @@ export const AlunoSchema = Yup.object().shape({
   certidaoLivro: Yup.string(),
   certidaoNumero: Yup.string(),
   OpcaoCertidao: Yup.string(),
+  emsCertidao: Yup.date(),
 
   // Informações dos pais
   cpfPai: Yup.string().matches(rgRegexCpf, "O CPF deve estar no formato 999.999.999-99."),
@@ -114,7 +115,7 @@ export const InitialDateForm = {
   certidaoNumero: '',
   OpcaoCertidao: 'Nova',
   DataNascimentoAluno: '',
-  emisCert: '',
+  emsCertidao: '',
 
   cpfPai: '',
   rgPai: '',

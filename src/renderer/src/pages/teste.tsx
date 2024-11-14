@@ -2,11 +2,20 @@
 
 
 export const Teste = ()=>{
+    
+    const matricula = {nome: 'Jose Roberto', ra: '123456789', dig: 'X'}
 
   async  function handleTeste(){
-        const data = await window.api.newRm();
-        console.log(data[0].newRm)
-    }
+        const isExist = await window.api.selectByRa(matricula.ra);
+        console.log(isExist)
+        if (isExist.length = 0){
+            const result = await window.api.criarNovoRm(matricula);
+            console.log(result)
+        }else{
+            console.log('Aluno cadastrado no RM: ', isExist)
+        }
+        console.log(isExist)
+  }
 
 
     return(
