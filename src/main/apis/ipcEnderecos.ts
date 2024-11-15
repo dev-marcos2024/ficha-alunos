@@ -17,7 +17,7 @@ ipcMain.handle("getUF", async ()=>{
 ipcMain.handle("getCidades", async (event, uf)=>{
   const result = await req.get(`/estados/${uf}/municipios`);
 
-  return result.data.map((item: Municipio) => item.nome)
+  return result.data
 })
 
 // Api para obter rua pelo CEP

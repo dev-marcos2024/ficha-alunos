@@ -1,5 +1,6 @@
-import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { queryClient } from "./queryClient";
+import { Municipio } from '../../../../types/TypeMunicipio'
 
 // Hook para buscar o endereco via cep
 export const useUf = () => {
@@ -10,10 +11,15 @@ export const useUf = () => {
 };
 
 // Hook para buscar cidades de um estado específico
+async function handleCidade(uf: string):Promise<Municipio[]>{
+  const data = await window.api.getCidades(uf.toUpperCase().trim())
+  return data.map((item: Municipio) => item.nome)
+}
+
 export const useCidades = (uf:string) => {
   return useQuery({
     queryKey: ['cidades', uf],  
-    queryFn: (): Promise<string[]> => window.api.getCidades(uf.toUpperCase().trim()),
+    queryFn: async (): Promise<Municipio[]> => await handleCidade(uf),
     enabled: !!uf,  
   });
 };

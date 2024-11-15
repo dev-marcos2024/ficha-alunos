@@ -8,15 +8,17 @@ interface Props{
     errors: string | undefined,
     touched: boolean | undefined,
     optionList: string[] | undefined,
-  placeholder: string
+  placeholder: string,
+  setSelected?: Dispatch<React.SetStateAction<string>>
 }
 
 
-export const SelectInput = ({name, touched, errors,optionList, placeholder}: Props)=>{
+export const SelectInput = ({name, touched, errors,optionList, placeholder, setSelected}: Props)=>{
     const [valor, setValor] = useState('')
     const { setFieldValue, setFieldTouched} = useFormikContext();
 
     const handleChange = (value: string) => {
+      setSelected && setSelected(value);
       setValor(value);
       setFieldValue(name, value);
     }

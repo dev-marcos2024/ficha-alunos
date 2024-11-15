@@ -1,5 +1,5 @@
 appId: com.electron.app
-productName: app-eletron-vite
+productName: ficha-de-cadastro
 directories:
   buildResources: build
 files:
@@ -12,7 +12,7 @@ files:
 asarUnpack:
   - resources/**
 win:
-  executableName: app-eletron-vite
+  executableName: ficha-de-cadastro
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}
@@ -31,13 +31,14 @@ dmg:
 linux:
   target:
     - AppImage
-    - snap
+    - rpm
     - deb
+    - freebsd
+    - pacman
   maintainer: electronjs.org
+  synopsis: ${description}
   category: Utility
 appImage:
   artifactName: ${name}-${version}.${ext}
 npmRebuild: false
-publish:
-  provider: generic
-  url: https://example.com/auto-updates
+

@@ -13,7 +13,7 @@ function createWindow() {
     minWidth: 1200,
     backgroundColor: '#222222',
     show: false,
-    autoHideMenuBar: true,
+    autoHideMenuBar: false,
     ...(process.platform === 'linux' ? {
       icon: path.join(__dirname, '../../build/icon.png')
     } : process.platform === 'win32' && {

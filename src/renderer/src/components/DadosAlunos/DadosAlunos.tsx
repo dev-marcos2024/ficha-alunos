@@ -100,7 +100,7 @@ export const DadosAlunos = ({touched, errors, setTouched, setErros, handleFile}:
 
             <div className="col max-w-48">
               <SelectInput name={"UfNascimento"} errors={errors.UfNascimento} touched={touched.UfNascimento}
-                           optionList={ufs.data} placeholder={"Estado"}/>
+                           optionList={ufs.data} placeholder={"Estado"} setSelected={setUf1}/>
             </div>
 
             <div className="col">
@@ -110,7 +110,7 @@ export const DadosAlunos = ({touched, errors, setTouched, setErros, handleFile}:
             </div>
 
             <div className="col max-w-48">
-              <SelectInput name={"ufComarcaNascimento"} errors={errors.ufComarcaNascimento}
+              <SelectInput name={"ufComarcaNascimento"} errors={errors.ufComarcaNascimento} setSelected={setUf2}
                            touched={touched.ufComarcaNascimento} optionList={ufs.data} placeholder={"Estado"}/>
             </div>
 
