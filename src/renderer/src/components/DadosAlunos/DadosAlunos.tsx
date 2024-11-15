@@ -13,6 +13,7 @@ import { Certidao } from '../Certidao/Index'
 import { InputDate } from '../Inputs/InputDate'
 import { InputRaMask } from "../Inputs/InputsMask/InputMackRa";
 import { InputFile } from '../Inputs/InputFile'
+import { SelectInput } from '../Selects/SelectInput'
 
 
 interface Props{
@@ -97,9 +98,9 @@ export const DadosAlunos = ({touched, errors, setTouched, setErros, handleFile}:
               />
             </div>
 
-            <div className="col max-w-40">
-              <Select name="UfNascimento" valueDisabled="Estado" errors={errors.UfNascimento}
-                      touched={touched.UfNascimento} optionList={ufs.data} setSelected={setUf1} />
+            <div className="col max-w-48">
+              <SelectInput name={"UfNascimento"} errors={errors.UfNascimento} touched={touched.UfNascimento}
+                           optionList={ufs.data} placeholder={"Estado"}/>
             </div>
 
             <div className="col">
@@ -108,9 +109,9 @@ export const DadosAlunos = ({touched, errors, setTouched, setErros, handleFile}:
               />
             </div>
 
-            <div className="col max-w-40">
-              <Select name="ufComarcaNascimento" valueDisabled="Estado" errors={errors.ufComarcaNascimento}
-                      touched={touched.ufComarcaNascimento} optionList={ufs.data} setSelected={setUf2} />
+            <div className="col max-w-48">
+              <SelectInput name={"ufComarcaNascimento"} errors={errors.ufComarcaNascimento}
+                           touched={touched.ufComarcaNascimento} optionList={ufs.data} placeholder={"Estado"}/>
             </div>
 
           </div>

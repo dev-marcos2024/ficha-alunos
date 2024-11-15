@@ -7,15 +7,14 @@ interface Props{
     name: string,
     errors: string | undefined,
     touched: boolean | undefined,
-    valueDisabled: string,
     optionList: string[] | undefined,
-    setSelected?: Dispatch<React.SetStateAction<string>>
+  placeholder: string
 }
 
 
-export const SelectInput = ({name, touched, errors, valueDisabled, optionList, setSelected}: Props)=>{
+export const SelectInput = ({name, touched, errors,optionList, placeholder}: Props)=>{
     const [valor, setValor] = useState('')
-    const { setFieldValue, setFieldTouched, setFieldError } = useFormikContext();
+    const { setFieldValue, setFieldTouched} = useFormikContext();
 
     const handleChange = (value: string) => {
       setValor(value);
@@ -31,7 +30,7 @@ export const SelectInput = ({name, touched, errors, valueDisabled, optionList, s
                     type="text" 
                     className={`form-control form-control-lg ${styles.input} ${touched && errors ? "is-invalid" : ""} ${touched && !errors ? "is-valid" : ""}`} 
                     id="exampleFormControlInput1" 
-                    placeholder="name@example.com"
+                    placeholder={placeholder}
                     onChange={(e:React.ChangeEvent<HTMLInputElement> )=> handleChange(e.target.value)}
                 />
                 <select className="form-select form-select-lg h-full" aria-label=".form-select-lg example"

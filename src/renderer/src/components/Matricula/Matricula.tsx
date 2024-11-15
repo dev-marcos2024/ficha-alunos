@@ -17,11 +17,8 @@ export const Matricula = ()=>{
 
             <div className="flex gap-6">
                 <div className="flex gap-6">
-                    {/* <Select name="serie" errors={errors.serie} optionList={serieAluno} 
-                        touched={touched.serie} valueDisabled="Serie do Aluno"/> */}
-
-                    <SelectInput name="serie" errors={errors.serie} optionList={serieAluno} 
-                    touched={touched.serie} valueDisabled="Serie do Aluno"/>
+                    <Select name="serie" errors={errors.serie} optionList={serieAluno}
+                        touched={touched.serie} valueDisabled="Serie do Aluno"/>
 
                     <Select name="turma" errors={errors.turma} optionList={['A','B','C','D','E','F','G',]} 
                         touched={touched.turma} valueDisabled="Turma do Aluno"/>
