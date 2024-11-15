@@ -22,7 +22,6 @@ export const SelectInput = ({name, touched, errors, valueDisabled, optionList, s
       setFieldValue(name, value);
     }
 
-    console.log(valor)
     return (
         <div className="h-[100%]">
             <div className={styles.areaComponente}>

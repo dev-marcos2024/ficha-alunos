@@ -3,6 +3,7 @@ import { electronAPI } from '@electron-toolkit/preload';
 import { Aluno} from '../types/TypeCadastro';
 import {TabelaRm} from '~/src/types/TypeSqlite'
 import { TypeRm, TypeNewCadastro } from '../types/TypesSqlite';
+import { TypeForm } from '@renderer/src/models/SchemaForm'
 
 const api = {
   getUF: (): Promise<string[]> => ipcRenderer.invoke('getUF'),
@@ -12,7 +13,7 @@ const api = {
   sendPrintRequest: () => ipcRenderer.send('sendPrintRequest'), 
   getAluno: (id: string): Promise<any>=> ipcRenderer.invoke('getAluno', id),
   updateAluno: (id: string, data: Aluno): Promise<any>=> ipcRenderer.invoke('updateAluno', id, data),
-  insertAluno: (doc: Aluno, key: string):Promise<PouchDB.Core.Response | void> => ipcRenderer.invoke('insertAluno', doc, key),
+  insertAluno: (doc:TypeForm |Aluno, key: string):Promise<PouchDB.Core.Response | void> => ipcRenderer.invoke('insertAluno', doc, key),
   insertFromListAlunos: ():Promise<any> => ipcRenderer.invoke('insertFromListAlunos'),
   selectAll: (table: string): Promise<TabelaRm[]> => ipcRenderer.invoke('selectAll', table),
   getNewRm: (): Promise<number> => ipcRenderer.invoke('getNewRm'),

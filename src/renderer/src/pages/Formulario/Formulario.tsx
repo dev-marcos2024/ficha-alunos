@@ -1,19 +1,36 @@
 import { Formik, Form } from 'formik';
-import { AlunoSchema, InitialDateForm } from '../../models/SchemaForm'
+import { AlunoSchema, InitialDateForm, TypeForm } from '../../models/SchemaForm'
 import { DadosAlunos } from '../../components/DadosAlunos/DadosAlunos'
 import { FiliacaoAluno } from '../../components/Filiacao/Index';
 import { Index } from '../../components/Endereco'
 import { Matricula } from '../../components/Matricula/Matricula';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react'
+import { useMenssage } from '../../contexts/ContextMenssage'
+import {TypeNewMatricula} from '~/src/types/TypeSqlite'
+import { ButtonSubmit } from '../../components/Buttons/ButtonSubmit';
+
 
 
 export const Formulario = () => {
+
   const [file, setFile] = useState<File | null>(null);
   const navigate = useNavigate();
+  const c = useMenssage()
 
   const handleSetFile = (file: File | null): void => {
     setFile(file);
+  }
+
+  const handleCeateNewRm = async (obj:TypeNewMatricula, newRm: string)=>{
+    const isExist = await window.api.selectByRa(obj.ra);
+    if (isExist.length === 0){
+      const result = await window.api.criarNovoRm(obj);
+      c?.handleMenssage(`Novo Rm Gerado com Sucesso: ${newRm}`, 'bg-green-500')
+    }else{
+      const msg = `Aluno já tem cadastrado no RM:  ${isExist[0].rm}`
+      c?.handleMenssage(msg, 'bg-yellow-300')
+    }
   }
 
   return (
@@ -21,8 +38,17 @@ export const Formulario = () => {
       initialValues={InitialDateForm}
       validationSchema={AlunoSchema}
       onSubmit={async (values) => {
-        console.log(await window.api.insertAluno({values}, values.ra.replaceAll('.', '')))
-        navigate('/ficha', { state: { ...values, fileName: file && file.name } })
+
+        const obj = {
+          nome: values.alunoNome,
+          ra: values.ra.replaceAll('.', '').slice(0, 9),
+          dig: values.ra.slice(-1)
+        }
+        await handleCeateNewRm(obj, values.rm);
+
+        console.log(await window.api.insertAluno(values, values.ra.replaceAll('.', '')))
+        navigate('/ficha', { state: { ...values, fileName: file && file.name } });
+
         if (file) {
           await window.api.uploadFile({ path: file.path, name: file.name })
         }
@@ -47,10 +73,7 @@ export const Formulario = () => {
           </div>
     
           <div className="flex p-10 items-center justify-center">
-            <button type="submit" className="btn btn-primary p-3 font-bold text-xl w-48">
-              <i className="bi bi-floppy2-fill mr-2"></i>
-              Salvar
-            </button>
+            <ButtonSubmit/>
             <Link className="btn btn-outline-danger" to="/ficha">
               Ficha
             </Link>

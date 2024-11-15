@@ -7,14 +7,13 @@ import 'primeicons/primeicons.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 
-
 function App(){
 
   return (
     <div>
-      <Providers>
-          <Routes/>
-      </Providers>
+        <Providers>
+            <Routes/>
+        </Providers>
     </div>
   )
 }

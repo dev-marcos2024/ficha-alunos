@@ -31,7 +31,7 @@ ipcMain.handle('insertFromListAlunos', async ()=>{
 });
 
 // Inseri Alunos no formulario.
-ipcMain.handle('insertAluno', async (event, doc: Aluno, key: string) => {
+ipcMain.handle('insertAluno', async (event, doc: TypeForm, key: string) => {
   try {
     const result = handleInsert(doc, key);
     return `DOCULMENTO INSERIDO COM SUCESSO ${result}`;
@@ -70,7 +70,7 @@ ipcMain.handle('updateAluno', async (event, id: string, data: Aluno) =>{
 })
 
 //====================> FUNCOES CRUD <=====================================================================
-const handleInsert  = async (doc: Aluno, key: string):Promise<PouchDB.Core.Response | void>=>{
+const handleInsert  = async (doc:Aluno | TypeForm, key: string):Promise<PouchDB.Core.Response | void>=>{
   const data = {...doc, _id: key};
   return db.put(data).then(response => response).catch(err => console.log('ERRO AO CADASTRAR', err));
 }

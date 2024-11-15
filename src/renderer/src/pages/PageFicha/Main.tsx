@@ -68,10 +68,10 @@ export const Main = ()=>{
               <p>05</p> SEXO
             </div>
             <div>
-              FEM. (<span id="opcao-fem">{data && data.alunoSexo === 'feminino' && 'X'}</span>)
+              FEM. <span id="opcao-fem">({data && data.alunoSexo === 'feminino' && 'X'})</span>
             </div>
             <div>
-              MASC. (<span id="opcao-masc">{data && data.alunoSexo === 'masculino' && 'X'}</span>)
+              MASC. <span id="opcao-masc">({data && data.alunoSexo === 'masculino' && 'X'})</span>
             </div>
           </div>
         </div>
@@ -132,7 +132,7 @@ export const Main = ()=>{
               <strong>CERTIDÃO NOVA (MATRICULA)</strong>
               <span id="certidao-nova">{data && data.certidaoNova}</span>
               <strong>DATA EMISSÃO</strong>
-              <span id='dataEmissao'>{ data &&  data.emisCert }</span>
+              <span id='dataEmissao'>{ data &&  data.emsCertidao }</span>
             </div>
           }
         </div>

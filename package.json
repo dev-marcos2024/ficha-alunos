@@ -1,9 +1,9 @@
 {
-  "name": "app-eletron-vite",
+  "name": "formulario-cadarasto",
   "version": "1.0.0",
-  "description": "An Electron application with React and TypeScript",
+  "description": "Formulario ficha cadastral alunos escola Laerte",
   "main": "./out/main/index.js",
-  "author": "example.com",
+  "author": "Marcos Roberto",
   "homepage": "https://electron-vite.org",
   "scripts": {
     "format": "prettier --write .",
